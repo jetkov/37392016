@@ -22,10 +22,10 @@ public class DriveTrain extends Subsystem {
 
 	public DriveTrain() {
 		// Declarations (with Talons on PWM ports 1-4)
-		flMotor = new Talon(4);
-		blMotor = new Talon(3);
-		frMotor = new Talon(2);
-		brMotor = new Talon(1);
+		flMotor = new Talon(1);
+		blMotor = new Talon(2);
+		frMotor = new Talon(3);
+		brMotor = new Talon(4);
 		drive = new RobotDrive(flMotor, blMotor, frMotor, brMotor);
 
 		// Displaying the Talons in the LiveWindow
