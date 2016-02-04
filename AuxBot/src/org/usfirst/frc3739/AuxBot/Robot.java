@@ -4,10 +4,12 @@ import org.usfirst.frc3739.AuxBot.commands.Autonomous;
 import org.usfirst.frc3739.AuxBot.subsystems.DriveTrain;
 import org.usfirst.frc3739.AuxBot.subsystems.Arm;
 
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -23,6 +25,8 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	public static DriveTrain driveTrain;
 	public static Arm testArmJoint;
+	
+	CameraServer cam;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -40,6 +44,11 @@ public class Robot extends IterativeRobot {
 
 		// instantiate the command used for the autonomous period
 		autonomousCommand = new Autonomous();
+		
+		cam = CameraServer.getInstance();
+        cam.setQuality(50);
+        //the camera name (ex "cam0") can be found through the roborio web interface
+        cam.startAutomaticCapture("cam0");
 	}
 
 	/**

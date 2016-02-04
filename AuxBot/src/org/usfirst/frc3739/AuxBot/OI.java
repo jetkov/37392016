@@ -17,15 +17,17 @@ public class OI {
 
 	public JoystickButton rightButton;
 	public JoystickButton leftButton;
-	public Joystick joystick;
+	public Joystick joystickA;
+	public Joystick joystickB;
 
 	public OI() {
 
-		joystick = new Joystick(0);
+		joystickA = new Joystick(0);
+		joystickB = new Joystick(1);
 
-		leftButton = new JoystickButton(joystick, 4);
+		leftButton = new JoystickButton(joystickA, 4);
 		leftButton.whenPressed(new EncoderLeft180());
-		rightButton = new JoystickButton(joystick, 5);
+		rightButton = new JoystickButton(joystickA, 5);
 		rightButton.whenPressed(new EncoderRight180());
 
 		// SmartDashboard Buttons
@@ -36,8 +38,11 @@ public class OI {
 
 	}
 
-	public Joystick getJoystick() {
-		return joystick;
+	public Joystick getJoystickA() {
+		return joystickA;
+	}
+	public Joystick getJoystickB() {
+		return joystickB;
 	}
 
 }

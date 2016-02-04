@@ -20,9 +20,15 @@ public class DriveTrain extends Subsystem {
 	private Talon lMotors, rMotors;
 
 	public DriveTrain() {
-		// Declarations (with Talons on PWM ports 1-4)
-		lMotors = new Talon(1);
-		rMotors = new Talon(2);
+		// Talon speed controller declarations on PWM ports 1 and 2
+		lMotors = new Talon(2);
+		rMotors = new Talon(1);
+		
+		// Setting the motors to inverted
+		lMotors.setInverted(true);
+		rMotors.setInverted(true);
+		
+		// Creating new RobotDrive object
 		drive = new RobotDrive(lMotors, rMotors);
 
 		// Displaying the Talons in the LiveWindow
@@ -38,10 +44,11 @@ public class DriveTrain extends Subsystem {
 	/**
 	 * Single-stick controlled arcade style driving.
 	 *
-	 * @param js The joystick to use to drive singlehandedly
+	 * @param moveStick The Joystick object that represents the forward/backward direction
+	 * @param rotateStick The Joystick object that represents the rotation value
 	 */
-	public void drive(Joystick js) {
-		drive.arcadeDrive(js);
+	public void drive(Joystick moveStick, Joystick rotateStick) {
+		drive.arcadeDrive(moveStick, 1, rotateStick, 0, true);
 	}
 
 	/**
