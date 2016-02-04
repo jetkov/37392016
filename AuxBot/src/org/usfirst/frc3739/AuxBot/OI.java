@@ -4,6 +4,7 @@ import org.usfirst.frc3739.AuxBot.commands.Autonomous;
 import org.usfirst.frc3739.AuxBot.commands.EncoderLeft180;
 import org.usfirst.frc3739.AuxBot.commands.EncoderRight180;
 import org.usfirst.frc3739.AuxBot.commands.JoyRide;
+import org.usfirst.frc3739.AuxBot.commands.ZeroPoint;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -14,9 +15,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-
-	public JoystickButton rightButton;
-	public JoystickButton leftButton;
+	
+	public JoystickButton triggerA;
+	public JoystickButton rightButtonA;
+	public JoystickButton leftButtonA;
 	public Joystick joystickA;
 	public Joystick joystickB;
 
@@ -24,11 +26,14 @@ public class OI {
 
 		joystickA = new Joystick(0);
 		joystickB = new Joystick(1);
-
-		leftButton = new JoystickButton(joystickA, 4);
-		leftButton.whenPressed(new EncoderLeft180());
-		rightButton = new JoystickButton(joystickA, 5);
-		rightButton.whenPressed(new EncoderRight180());
+		
+		triggerA = new JoystickButton(joystickA, 1);
+		triggerA.whileHeld(new ZeroPoint());
+		leftButtonA = new JoystickButton(joystickA, 4);
+		leftButtonA.whenPressed(new EncoderLeft180());
+		
+		rightButtonA = new JoystickButton(joystickA, 5);
+		rightButtonA.whenPressed(new EncoderRight180());
 
 		// SmartDashboard Buttons
 		SmartDashboard.putData("EncoderRight180", new EncoderRight180());
