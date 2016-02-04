@@ -4,7 +4,6 @@ import org.usfirst.frc3739.AuxBot.commands.JoyRide;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -18,21 +17,17 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 public class DriveTrain extends Subsystem {
 
 	private RobotDrive drive;
-	private SpeedController flMotor, blMotor, frMotor, brMotor;
+	private Talon lMotors, rMotors;
 
 	public DriveTrain() {
 		// Declarations (with Talons on PWM ports 1-4)
-		flMotor = new Talon(4);
-		blMotor = new Talon(3);
-		frMotor = new Talon(2);
-		brMotor = new Talon(1);
-		drive = new RobotDrive(blMotor, flMotor, brMotor, frMotor);
+		lMotors = new Talon(1);
+		rMotors = new Talon(2);
+		drive = new RobotDrive(lMotors, rMotors);
 
 		// Displaying the Talons in the LiveWindow
-		LiveWindow.addActuator("Drive Train", "Front Left Motor", (Talon) flMotor);
-		LiveWindow.addActuator("Drive Train", "Back Left Motor", (Talon) blMotor);
-		LiveWindow.addActuator("Drive Train", "Front Right Motor", (Talon) frMotor);
-		LiveWindow.addActuator("Drive Train", "Back Right Motor", (Talon) brMotor);
+		LiveWindow.addActuator("Drive Train", "Left Motors", lMotors);
+		LiveWindow.addActuator("Drive Train", "Right Motors", rMotors);
 	}
 
 	// Hand drivetrain over to joystick control when subsystem is idle
