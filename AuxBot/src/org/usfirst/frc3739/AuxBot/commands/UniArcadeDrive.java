@@ -2,18 +2,17 @@ package org.usfirst.frc3739.AuxBot.commands;
 
 import org.usfirst.frc3739.AuxBot.Robot;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
  * Robot drives arcade style with a single joystick.
- * 
+ *
  * @author Alex
  * @version 1.0.0b
  */
-public class ZeroPoint extends Command {
+public class UniArcadeDrive extends Command {
 
-	public ZeroPoint() {
+	public UniArcadeDrive() {
 		requires(Robot.driveTrain);
 	}
 
@@ -23,7 +22,7 @@ public class ZeroPoint extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.driveTrain.drive(Robot.oi.getJoystickA(), Robot.oi.getJoystickA());
+		Robot.driveTrain.drive(Robot.oi.getJoystickA());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

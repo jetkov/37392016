@@ -1,10 +1,9 @@
 package org.usfirst.frc3739.AuxBot;
 
+import org.usfirst.frc3739.AuxBot.commands.UniArcadeDrive;
 import org.usfirst.frc3739.AuxBot.commands.Autonomous;
-import org.usfirst.frc3739.AuxBot.commands.EncoderLeft180;
-import org.usfirst.frc3739.AuxBot.commands.EncoderRight180;
-import org.usfirst.frc3739.AuxBot.commands.JoyRide;
-import org.usfirst.frc3739.AuxBot.commands.ZeroPoint;
+import org.usfirst.frc3739.AuxBot.commands.EncoderTestLeft180;
+import org.usfirst.frc3739.AuxBot.commands.EncoderTestRight180;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -15,7 +14,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	
+
 	public JoystickButton triggerA;
 	public JoystickButton rightButtonA;
 	public JoystickButton leftButtonA;
@@ -24,21 +23,23 @@ public class OI {
 
 	public OI() {
 
+		// Declaring joysticks
 		joystickA = new Joystick(0);
 		joystickB = new Joystick(1);
-		
+
+		// Initializing and mapping joystick buttons
 		triggerA = new JoystickButton(joystickA, 1);
-		triggerA.whileHeld(new ZeroPoint());
+		triggerA.whileHeld(new UniArcadeDrive());
+
 		leftButtonA = new JoystickButton(joystickA, 4);
-		leftButtonA.whenPressed(new EncoderLeft180());
-		
+		leftButtonA.whenPressed(new EncoderTestLeft180());
+
 		rightButtonA = new JoystickButton(joystickA, 5);
-		rightButtonA.whenPressed(new EncoderRight180());
+		rightButtonA.whenPressed(new EncoderTestRight180());
 
 		// SmartDashboard Buttons
-		SmartDashboard.putData("EncoderRight180", new EncoderRight180());
-		SmartDashboard.putData("EncoderLeft180", new EncoderLeft180());
-		SmartDashboard.putData("JoyRide", new JoyRide());
+		SmartDashboard.putData("EncoderRight180", new EncoderTestRight180());
+		SmartDashboard.putData("EncoderLeft180", new EncoderTestLeft180());
 		SmartDashboard.putData("Autonomous", new Autonomous());
 
 	}
@@ -46,6 +47,7 @@ public class OI {
 	public Joystick getJoystickA() {
 		return joystickA;
 	}
+
 	public Joystick getJoystickB() {
 		return joystickB;
 	}

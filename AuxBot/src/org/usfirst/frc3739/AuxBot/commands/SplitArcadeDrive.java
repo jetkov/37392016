@@ -5,37 +5,40 @@ import org.usfirst.frc3739.AuxBot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Rotates the joint 180 degrees to the right
+ * Robot drives arcade style with two joysticks, controlling movement and
+ * rotation separately.
+ *
+ * @author Alex
+ * @version 1.0.1b
  */
-public class EncoderRight180 extends Command {
+public class SplitArcadeDrive extends Command {
 
-	public EncoderRight180() {
-		requires(Robot.testArmJoint);
+	public SplitArcadeDrive() {
+		requires(Robot.driveTrain);
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		Robot.testArmJoint.rotateJoint(180);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
+		Robot.driveTrain.drive(Robot.oi.getJoystickA(), Robot.oi.getJoystickB());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		// return Robot.testArmJoint.rotateFinsihed();
 		return false;
 	}
 
 	// Called once after isFinished returns true
 	protected void end() {
-		Robot.testArmJoint.stopJoint();
+		Robot.driveTrain.drive(0, 0);
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
-		Robot.testArmJoint.stopJoint();
+		end();
 	}
 }

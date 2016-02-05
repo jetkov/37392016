@@ -5,17 +5,17 @@ import org.usfirst.frc3739.AuxBot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Rotates the joint 180 degrees to the left
+ * Rotates the joint 180 degrees to the right
  */
-public class EncoderLeft180 extends Command {
+public class EncoderTestRight180 extends Command {
 
-	public EncoderLeft180() {
+	public EncoderTestRight180() {
 		requires(Robot.testArmJoint);
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		Robot.testArmJoint.rotateJoint(-180);
+		Robot.testArmJoint.rotateJoint(180);
 	}
 
 	// Called repeatedly when this Command is scheduled to run

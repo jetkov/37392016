@@ -3,7 +3,7 @@ package org.usfirst.frc3739.AuxBot.commands;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Nothing here yet
  */
 public class Autonomous extends Command {
 
