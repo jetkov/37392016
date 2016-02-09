@@ -2,8 +2,8 @@ package org.usfirst.frc3739.AuxBot;
 
 import org.usfirst.frc3739.AuxBot.commands.UniArcadeDrive;
 import org.usfirst.frc3739.AuxBot.commands.Autonomous;
-import org.usfirst.frc3739.AuxBot.commands.EncoderTestLeft180;
-import org.usfirst.frc3739.AuxBot.commands.EncoderTestRight180;
+import org.usfirst.frc3739.AuxBot.commands.FireBall;
+import org.usfirst.frc3739.AuxBot.commands.GrabBall;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -14,33 +14,26 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-
-	public JoystickButton triggerA;
-	public JoystickButton rightButtonA;
-	public JoystickButton leftButtonA;
-	public Joystick joystickA;
-	public Joystick joystickB;
+	
+	private Joystick joystickA = new Joystick(0);
+	private Joystick joystickB = new Joystick(1);
 
 	public OI() {
-
-		// Declaring joysticks
-		joystickA = new Joystick(0);
-		joystickB = new Joystick(1);
-
-		// Initializing and mapping joystick buttons
-		triggerA = new JoystickButton(joystickA, 1);
-		triggerA.whileHeld(new UniArcadeDrive());
-
-		leftButtonA = new JoystickButton(joystickA, 4);
-		leftButtonA.whenPressed(new EncoderTestLeft180());
-
-		rightButtonA = new JoystickButton(joystickA, 5);
-		rightButtonA.whenPressed(new EncoderTestRight180());
-
+		
 		// SmartDashboard Buttons
-		SmartDashboard.putData("EncoderRight180", new EncoderTestRight180());
-		SmartDashboard.putData("EncoderLeft180", new EncoderTestLeft180());
+		SmartDashboard.putData("Grab Ball", new GrabBall());
+		SmartDashboard.putData("Fire Ball", new FireBall());
 		SmartDashboard.putData("Autonomous", new Autonomous());
+		
+		// Creating buttons
+		JoystickButton triggerA = new JoystickButton(joystickA, 1);
+		JoystickButton dUpA = new JoystickButton(joystickA, 3);
+		JoystickButton dDownA = new JoystickButton(joystickA, 2);
+		
+		// Mapping buttons
+		triggerA.whileHeld(new UniArcadeDrive());
+		dDownA.whileHeld(new GrabBall());
+		dUpA.whileHeld(new FireBall());
 
 	}
 

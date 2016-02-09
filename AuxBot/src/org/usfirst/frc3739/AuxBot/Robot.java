@@ -2,6 +2,7 @@ package org.usfirst.frc3739.AuxBot;
 
 import org.usfirst.frc3739.AuxBot.commands.Autonomous;
 import org.usfirst.frc3739.AuxBot.subsystems.DriveTrain;
+import org.usfirst.frc3739.AuxBot.subsystems.Hand;
 import org.usfirst.frc3739.AuxBot.subsystems.Arm;
 
 import edu.wpi.first.wpilibj.CameraServer;
@@ -23,7 +24,8 @@ public class Robot extends IterativeRobot {
 
 	public static OI oi;
 	public static DriveTrain driveTrain;
-	public static Arm testArmJoint;
+	public static Arm arm;
+	public static Hand hand;
 	
 	CameraServer cam;
 
@@ -33,7 +35,8 @@ public class Robot extends IterativeRobot {
 	 */
 	public void robotInit() {
 		driveTrain = new DriveTrain();
-		testArmJoint = new Arm();
+		arm = new Arm();
+		hand = new Hand();
 
 		// OI must be constructed after subsystems. If the OI creates Commands
 		// (which it very likely will), subsystems are not guaranteed to be
