@@ -4,7 +4,6 @@ import org.usfirst.frc3739.AuxBot.commands.SplitArcadeDrive;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -15,7 +14,6 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  * @author Alex
  * @version 1.0.3b
  */
-@SuppressWarnings("unused")
 public class DriveTrain extends Subsystem {
 
 	private RobotDrive drive;
