@@ -21,7 +21,7 @@ public class Hand extends Subsystem {
 	public Hand() {
 		// Declarations
 		motors = new Victor(4);
-		contact = new DigitalInput(2);
+		contact = new DigitalInput(5);
 
 		// Displaying these in the LiveWindow
 		LiveWindow.addActuator("Hand", "Grab Motors", motors);
@@ -35,11 +35,11 @@ public class Hand extends Subsystem {
 	};
 	
 	public void grab() {
-		motors.set(-1);
+		motors.set(1);
 	}
 	
 	public void fire() {
-		motors.set(1);
+		motors.set(-1);
 	}
 	
 	public void stop() {

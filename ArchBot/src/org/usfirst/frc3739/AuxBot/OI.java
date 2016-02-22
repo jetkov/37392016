@@ -15,11 +15,12 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class OI {
 	
-	private Joystick joystickA = new Joystick(0);
-	private Joystick joystickB = new Joystick(1);
+	private Joystick joystickA = new Joystick(2);
+	private Joystick joystickB = new Joystick(3);
+	private Joystick joystickC = new Joystick(0);
+	private Joystick joystickD = new Joystick(1);
 
 	public OI() {
-		
 		// SmartDashboard Buttons
 		SmartDashboard.putData("Grab Ball", new GrabBall());
 		SmartDashboard.putData("Fire Ball", new FireBall());
@@ -27,22 +28,23 @@ public class OI {
 		
 		// Creating buttons
 		JoystickButton triggerA = new JoystickButton(joystickA, 1);
-		JoystickButton dUpA = new JoystickButton(joystickA, 3);
-		JoystickButton dDownA = new JoystickButton(joystickA, 2);
+		JoystickButton dUpD = new JoystickButton(joystickD, 3);
+		JoystickButton dDownD = new JoystickButton(joystickD, 2);
 		
 		// Mapping buttons
 		triggerA.whileHeld(new UniArcadeDrive());
-		dDownA.whileHeld(new GrabBall());
-		dUpA.whileHeld(new FireBall());
-
+		dDownD.whileHeld(new GrabBall());
+		dUpD.whileHeld(new FireBall());
 	}
 
-	public Joystick getJoystickA() {
+	public Joystick getJoystick(char joystickLetter) {
+		switch (joystickLetter) {
+			case 'a': return joystickA;
+			case 'b': return joystickB;
+			case 'c': return joystickC;
+			case 'd': return joystickD;
+		}
 		return joystickA;
-	}
-
-	public Joystick getJoystickB() {
-		return joystickB;
 	}
 
 }

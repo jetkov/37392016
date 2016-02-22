@@ -23,7 +23,7 @@ public class SplitArcadeDrive extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.driveTrain.drive(Robot.oi.getJoystickA(), Robot.oi.getJoystickB());
+		Robot.driveTrain.drive(Robot.oi.getJoystick('a'), Robot.oi.getJoystick('b'));
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

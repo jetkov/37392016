@@ -4,7 +4,7 @@ import org.usfirst.frc3739.AuxBot.commands.Autonomous;
 import org.usfirst.frc3739.AuxBot.subsystems.DriveTrain;
 import org.usfirst.frc3739.AuxBot.subsystems.Hand;
 import org.usfirst.frc3739.AuxBot.subsystems.Winch;
-import org.usfirst.frc3739.AuxBot.subsystems.Arm;
+import org.usfirst.frc3739.AuxBot.subsystems.CanadArm;
 
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -26,7 +26,7 @@ public class Robot extends IterativeRobot {
 	public static OI oi;
 	public static DriveTrain driveTrain;
 	public static Winch winch;
-	public static Arm arm;
+	public static CanadArm arm;
 	public static Hand hand;
 	
 	CameraServer cam;
@@ -38,7 +38,7 @@ public class Robot extends IterativeRobot {
 	public void robotInit() {
 		driveTrain = new DriveTrain();
 		winch = new Winch();
-		arm = new Arm();
+		arm = new CanadArm();
 		hand = new Hand();
 
 		// OI must be constructed after subsystems. If the OI creates Commands
