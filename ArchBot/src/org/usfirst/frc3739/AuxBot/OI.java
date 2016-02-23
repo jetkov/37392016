@@ -4,6 +4,7 @@ import org.usfirst.frc3739.AuxBot.commands.UniArcadeDrive;
 import org.usfirst.frc3739.AuxBot.commands.Autonomous;
 import org.usfirst.frc3739.AuxBot.commands.FireBall;
 import org.usfirst.frc3739.AuxBot.commands.GrabBall;
+import org.usfirst.frc3739.AuxBot.commands.RotateElbow90;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
@@ -24,7 +25,9 @@ public class OI {
 		// SmartDashboard Buttons
 		SmartDashboard.putData("Grab Ball", new GrabBall());
 		SmartDashboard.putData("Fire Ball", new FireBall());
+		SmartDashboard.putData("Rotate Elbow 90 Degrees", new RotateElbow90());
 		SmartDashboard.putData("Autonomous", new Autonomous());
+		SmartDashboard.putNumber("Shoulder Encoder", 0.0);
 		
 		// Creating buttons
 		JoystickButton triggerA = new JoystickButton(joystickA, 1);

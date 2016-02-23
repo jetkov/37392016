@@ -4,6 +4,7 @@ import org.usfirst.frc3739.AuxBot.Robot;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 public class ArmControl extends Command {
 	private Joystick joystickC = Robot.oi.getJoystick('c');
@@ -37,8 +38,10 @@ public class ArmControl extends Command {
 			Robot.arm.setElbowJointSpeed(joyDY);
 			elbowPausePosition = Robot.arm.getElbowEncoderDistance();
 		} else {
-			Robot.arm.setElbowJointPosition(elbowPausePosition);
+			Robot.arm.setElbowJointPosition(elbowPausePosition, 0.05);
 		}
+		SmartDashboard.putNumber("Shoulder Encoder", shoulderPausePosition);
+		SmartDashboard.putNumber("Elbow Encoder", elbowPausePosition);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

@@ -72,11 +72,11 @@ public class CanadArm extends Subsystem {
 		}
 	}
 
-	public void setElbowJointPosition(double elbowSetpoint) {
+	public void setElbowJointPosition(double elbowSetpoint, double speed) {
 		if (elbowEncoder.getDistance() < elbowSetpoint) {
-			elbowJoint.set(jointCompensateSpeed);
+			elbowJoint.set(speed);
 		} else if (elbowEncoder.getDistance() > elbowSetpoint) {
-			elbowJoint.set(-jointCompensateSpeed);
+			elbowJoint.set(-speed);
 		}
 	}
 
