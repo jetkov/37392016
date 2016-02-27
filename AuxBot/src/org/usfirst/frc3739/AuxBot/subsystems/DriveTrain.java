@@ -2,9 +2,11 @@ package org.usfirst.frc3739.AuxBot.subsystems;
 
 import org.usfirst.frc3739.AuxBot.commands.SplitArcadeDrive;
 
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
-import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Timer;
+import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
@@ -17,23 +19,28 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 public class DriveTrain extends Subsystem {
 
 	private RobotDrive drive;
-	private Talon lMotors, rMotors;
+	private Victor lMotors, rMotors;
+	ADXRS450_Gyro gyro;
+	
+	private static final double kP = 0.03;
 
 	public DriveTrain() {
-		// Talon speed controller declarations on PWM ports 1 and 2
-		lMotors = new Talon(2);
-		rMotors = new Talon(1);
+		// Victor speed controller declarations on PWM ports 1 and 2
+		lMotors = new Victor(0);
+		rMotors = new Victor(1);
 
 		// Setting the motors to inverted (due to the gearboxes)
 		lMotors.setInverted(true);
 		rMotors.setInverted(true);
 
-		// Initializing new RobotDrive object
+		// Initializing new RobotDrive object and gyro
 		drive = new RobotDrive(lMotors, rMotors);
+		gyro = new ADXRS450_Gyro();
 
 		// Displaying the Talons in the LiveWindow
 		LiveWindow.addActuator("Drive Train", "Left Motors", lMotors);
 		LiveWindow.addActuator("Drive Train", "Right Motors", rMotors);
+		LiveWindow.addSensor("Drive Train", "Gyro", gyro);
 	}
 
 	// Hands the drivetrain over to joystick control when the subsystem is idle
@@ -71,6 +78,13 @@ public class DriveTrain extends Subsystem {
 	 */
 	public void drive(double moveValue, double rotateValue) {
 		drive.arcadeDrive(moveValue, rotateValue);
+	}
+	
+	public void autoDrive() {
+		gyro.reset();
+		double angle = gyro.getAngle();
+		drive.drive(-1.0, -angle * kP);
+		Timer.delay(0.004);
 	}
 
 }

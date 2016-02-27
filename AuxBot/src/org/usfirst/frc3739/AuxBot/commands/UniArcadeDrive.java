@@ -22,7 +22,7 @@ public class UniArcadeDrive extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.driveTrain.drive(Robot.oi.getJoystickA());
+		Robot.driveTrain.drive(Robot.oi.getJoystick('a'));
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
