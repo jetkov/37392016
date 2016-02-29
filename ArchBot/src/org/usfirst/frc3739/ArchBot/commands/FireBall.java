@@ -1,6 +1,7 @@
-package org.usfirst.frc3739.AuxBot.commands;
+package org.usfirst.frc3739.ArchBot.commands;
 
-import org.usfirst.frc3739.AuxBot.Robot;
+import org.usfirst.frc3739.ArchBot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
 public class FireBall extends Command {

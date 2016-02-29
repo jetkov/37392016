@@ -1,29 +1,26 @@
-package org.usfirst.frc3739.AuxBot.commands;
+package org.usfirst.frc3739.ArchBot.commands;
 
-import org.usfirst.frc3739.AuxBot.Robot;
+import org.usfirst.frc3739.ArchBot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-/**
- * Robot drives arcade style with two joysticks, controlling movement and
- * rotation separately.
- *
- * @author Alex
- * @version 1.0.1b
- */
-public class SplitArcadeDrive extends Command {
+public class RotateElbow90 extends Command {
+	private double elbowSetPosition;
 
-	public SplitArcadeDrive() {
-		requires(Robot.driveTrain);
+	public RotateElbow90() {
+		requires(Robot.arm);
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		elbowSetPosition = Robot.arm.getElbowEncoderDistance() + 90 * 2.957;
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.driveTrain.drive(Robot.oi.getJoystick('a'), Robot.oi.getJoystick('b'));
+		Robot.arm.setElbowJointPosition(elbowSetPosition, 0.5);
+		SmartDashboard.putNumber("Elbow Encoder", elbowSetPosition);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -33,7 +30,6 @@ public class SplitArcadeDrive extends Command {
 
 	// Called once after isFinished returns true
 	protected void end() {
-		Robot.driveTrain.drive(0, 0);
 	}
 
 	// Called when another command which requires one or more of the same

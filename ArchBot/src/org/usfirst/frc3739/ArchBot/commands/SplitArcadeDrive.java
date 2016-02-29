@@ -1,18 +1,19 @@
-package org.usfirst.frc3739.AuxBot.commands;
+package org.usfirst.frc3739.ArchBot.commands;
 
-import org.usfirst.frc3739.AuxBot.Robot;
+import org.usfirst.frc3739.ArchBot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Robot drives arcade style with a single joystick.
+ * Robot drives arcade style with two joysticks, controlling movement and
+ * rotation separately.
  *
  * @author Alex
- * @version 1.0.0b
+ * @version 1.0.1b
  */
-public class UniArcadeDrive extends Command {
+public class SplitArcadeDrive extends Command {
 
-	public UniArcadeDrive() {
+	public SplitArcadeDrive() {
 		requires(Robot.driveTrain);
 	}
 
@@ -22,7 +23,7 @@ public class UniArcadeDrive extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.driveTrain.drive(Robot.oi.getJoystick('a'));
+		Robot.driveTrain.drive(Robot.oi.getJoystick('a'), Robot.oi.getJoystick('b'));
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

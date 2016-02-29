@@ -11,12 +11,16 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
-public class OI {
+public class Hardware {
+
+	private static final boolean isArchBot = false;
+
+	private static final int leftMotorsPort = 0, rightMotorsPort = 1;
 
 	private Joystick joystickA = new Joystick(0);
 	private Joystick joystickB = new Joystick(1);
 
-	public OI() {
+	public Hardware() {
 		// SmartDashboard Buttons
 		SmartDashboard.putData("Autonomous", new Autonomous());
 		SmartDashboard.putNumber("Shoulder Encoder", 0.0);

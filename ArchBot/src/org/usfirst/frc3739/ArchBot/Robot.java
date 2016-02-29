@@ -1,10 +1,10 @@
-package org.usfirst.frc3739.AuxBot;
+package org.usfirst.frc3739.ArchBot;
 
-import org.usfirst.frc3739.AuxBot.commands.Autonomous;
-import org.usfirst.frc3739.AuxBot.subsystems.DriveTrain;
-import org.usfirst.frc3739.AuxBot.subsystems.Hand;
-import org.usfirst.frc3739.AuxBot.subsystems.Winch;
-import org.usfirst.frc3739.AuxBot.subsystems.CanadArm;
+import org.usfirst.frc3739.ArchBot.commands.Autonomous;
+import org.usfirst.frc3739.ArchBot.subsystems.CanadArm;
+import org.usfirst.frc3739.ArchBot.subsystems.DriveTrain;
+import org.usfirst.frc3739.ArchBot.subsystems.Hand;
+import org.usfirst.frc3739.ArchBot.subsystems.Winch;
 
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;

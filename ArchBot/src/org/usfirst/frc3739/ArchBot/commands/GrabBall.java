@@ -1,17 +1,18 @@
-package org.usfirst.frc3739.AuxBot.commands;
+package org.usfirst.frc3739.ArchBot.commands;
 
-import org.usfirst.frc3739.AuxBot.Robot;
+import org.usfirst.frc3739.ArchBot.Robot;
+
 import edu.wpi.first.wpilibj.command.Command;
 
-public class FireBall extends Command {
+public class GrabBall extends Command {
     
-    public FireBall() {
+    public GrabBall() {
         requires(Robot.hand);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-        Robot.hand.fire();
+        Robot.hand.grab();
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -20,7 +21,7 @@ public class FireBall extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return Robot.hand.grabComplete();
     }
 
     // Called once after isFinished returns true

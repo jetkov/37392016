@@ -1,4 +1,4 @@
-package org.usfirst.frc3739.AuxBot.subsystems;
+package org.usfirst.frc3739.ArchBot.subsystems;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Victor;

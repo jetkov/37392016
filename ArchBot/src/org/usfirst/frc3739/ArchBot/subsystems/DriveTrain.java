@@ -1,6 +1,6 @@
-package org.usfirst.frc3739.AuxBot.subsystems;
+package org.usfirst.frc3739.ArchBot.subsystems;
 
-import org.usfirst.frc3739.AuxBot.commands.SplitArcadeDrive;
+import org.usfirst.frc3739.ArchBot.commands.SplitArcadeDrive;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.Joystick;

@@ -1,10 +1,10 @@
-package org.usfirst.frc3739.AuxBot;
+package org.usfirst.frc3739.ArchBot;
 
-import org.usfirst.frc3739.AuxBot.commands.UniArcadeDrive;
-import org.usfirst.frc3739.AuxBot.commands.Autonomous;
-import org.usfirst.frc3739.AuxBot.commands.FireBall;
-import org.usfirst.frc3739.AuxBot.commands.GrabBall;
-import org.usfirst.frc3739.AuxBot.commands.RotateElbow90;
+import org.usfirst.frc3739.ArchBot.commands.Autonomous;
+import org.usfirst.frc3739.ArchBot.commands.FireBall;
+import org.usfirst.frc3739.ArchBot.commands.GrabBall;
+import org.usfirst.frc3739.ArchBot.commands.RotateElbow90;
+import org.usfirst.frc3739.ArchBot.commands.UniArcadeDrive;
 
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;

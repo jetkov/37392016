@@ -1,6 +1,6 @@
-package org.usfirst.frc3739.AuxBot.subsystems;
+package org.usfirst.frc3739.ArchBot.subsystems;
 
-import org.usfirst.frc3739.AuxBot.commands.ArmControl;
+import org.usfirst.frc3739.ArchBot.commands.ArmControl;
 
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Timer;
