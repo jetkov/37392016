@@ -1,10 +1,13 @@
 package org.usfirst.frc3739.AuxBot.subsystems;
 
+import org.usfirst.frc3739.AuxBot.Hardware;
 import org.usfirst.frc3739.AuxBot.commands.SplitArcadeDrive;
+import org.usfirst.frc3739.AuxBot.utilities.SmartJoystick;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.SpeedController;
+import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -19,15 +22,20 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 public class DriveTrain extends Subsystem {
 
 	private RobotDrive drive;
-	private Victor lMotors, rMotors;
+	private SpeedController lMotors, rMotors;
 	ADXRS450_Gyro gyro;
-	
+
 	private static final double kP = 0.03;
 
 	public DriveTrain() {
-		// Victor speed controller declarations on PWM ports 1 and 2
-		lMotors = new Victor(0);
-		rMotors = new Victor(1);
+		// Speed controller declarations on PWM ports 1 and 2
+		if (Hardware.isArchBot == true) {
+			lMotors = new Victor(Hardware.leftMotorsPort);
+			rMotors = new Victor(Hardware.rightMotorsPort);
+		} else {
+			lMotors = new Talon(Hardware.leftMotorsPort);
+			rMotors = new Talon(Hardware.rightMotorsPort);
+		}
 
 		// Setting the motors to inverted (due to the gearboxes)
 		lMotors.setInverted(true);
@@ -38,8 +46,6 @@ public class DriveTrain extends Subsystem {
 		gyro = new ADXRS450_Gyro();
 
 		// Displaying the Talons in the LiveWindow
-		LiveWindow.addActuator("Drive Train", "Left Motors", lMotors);
-		LiveWindow.addActuator("Drive Train", "Right Motors", rMotors);
 		LiveWindow.addSensor("Drive Train", "Gyro", gyro);
 	}
 
@@ -51,35 +57,44 @@ public class DriveTrain extends Subsystem {
 	/**
 	 * Single-stick controlled arcade style driving.
 	 *
-	 * @param js The joystick to use for Arcade single-stick driving. The Y-axis
-	 *        will be selected for forwards/backwards and the X-axis will be
-	 *        selected for rotation rate.
+	 * @param js
+	 *            The joystick to use for Arcade single-stick driving. The
+	 *            Y-axis will be selected for forwards/backwards and the X-axis
+	 *            will be selected for rotation rate.
 	 */
-	public void drive(Joystick js) {
+	public void drive(SmartJoystick js) {
 		drive.arcadeDrive(js, true);
 	}
 
 	/**
 	 * Dual-stick controlled (a.k.a. East Coast?) arcade style driving.
 	 *
-	 * @param moveStick The Joystick object that represents the forward/backward
-	 *        direction
-	 * @param rotateStick The Joystick object that represents the rotation value
+	 * @param moveStick
+	 *            The Joystick object that represents the forward/backward
+	 *            direction
+	 * @param rotateStick
+	 *            The Joystick object that represents the rotation value
 	 */
-	public void drive(Joystick moveStick, Joystick rotateStick) {
+	public void drive(SmartJoystick moveStick, SmartJoystick rotateStick) {
 		drive.arcadeDrive(moveStick, 1, rotateStick, 0, true);
 	}
 
 	/**
 	 * Value controlled arcade style driving.
 	 *
-	 * @param moveValue The value to use for forwards/backwards
-	 * @param rotateValue The value to use for the rotate right/left
+	 * @param moveValue
+	 *            The value to use for forwards/backwards
+	 * @param rotateValue
+	 *            The value to use for the rotate right/left
 	 */
+	public void drive(double moveValue, double rotateValue, boolean squaredInputs) {
+		drive.arcadeDrive(moveValue, rotateValue);
+	}
+
 	public void drive(double moveValue, double rotateValue) {
 		drive.arcadeDrive(moveValue, rotateValue);
 	}
-	
+
 	public void autoDrive() {
 		gyro.reset();
 		double angle = gyro.getAngle();

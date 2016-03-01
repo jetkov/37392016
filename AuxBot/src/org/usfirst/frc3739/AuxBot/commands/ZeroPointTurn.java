@@ -12,9 +12,9 @@ import edu.wpi.first.wpilibj.command.Command;
  * @author Alex
  * @version 1.0.1b
  */
-public class SplitArcadeDrive extends Command {
+public class ZeroPointTurn extends Command {
 
-	public SplitArcadeDrive() {
+	public ZeroPointTurn() {
 		requires(Robot.driveTrain);
 	}
 
@@ -24,11 +24,8 @@ public class SplitArcadeDrive extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		SmartJoystick joystickA = Robot.oi.getJoystick('a');
 		SmartJoystick joystickB = Robot.oi.getJoystick('b');
-		if (joystickA.getSmartY() > 0.05) {
-			Robot.driveTrain.drive(joystickA.getSmartY(), joystickB.getSmartX(), true);
-		}
+		Robot.driveTrain.drive(0, joystickB.getSmartX());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
