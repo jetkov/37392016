@@ -38,8 +38,8 @@ public class DriveTrain extends Subsystem {
 		}
 
 		// Setting the motors to inverted (due to the gearboxes)
-		lMotors.setInverted(true);
-		rMotors.setInverted(true);
+		//lMotors.setInverted(true);
+		//rMotors.setInverted(true);
 
 		// Initializing new RobotDrive object and gyro
 		drive = new RobotDrive(lMotors, rMotors);
@@ -88,7 +88,7 @@ public class DriveTrain extends Subsystem {
 	 *            The value to use for the rotate right/left
 	 */
 	public void drive(double moveValue, double rotateValue, boolean squaredInputs) {
-		drive.arcadeDrive(moveValue, rotateValue);
+		drive.arcadeDrive(moveValue, rotateValue, squaredInputs);
 	}
 
 	public void drive(double moveValue, double rotateValue) {

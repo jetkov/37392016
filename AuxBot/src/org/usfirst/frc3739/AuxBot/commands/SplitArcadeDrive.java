@@ -26,8 +26,8 @@ public class SplitArcadeDrive extends Command {
 	protected void execute() {
 		SmartJoystick joystickA = Robot.oi.getJoystick('a');
 		SmartJoystick joystickB = Robot.oi.getJoystick('b');
-		if (joystickA.getSmartY() > 0.05) {
-			Robot.driveTrain.drive(joystickA.getSmartY(), joystickB.getSmartX(), true);
+		if (joystickA.getSmartY() > 0.05 || joystickA.getSmartY() < 0.05) {
+			Robot.driveTrain.drive(joystickA.getSmartY(), -joystickB.getSmartX(), true);
 		}
 	}
 
