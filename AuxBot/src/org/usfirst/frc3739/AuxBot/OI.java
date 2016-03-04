@@ -1,7 +1,7 @@
 package org.usfirst.frc3739.AuxBot;
 
 import org.usfirst.frc3739.AuxBot.commands.Autonomous;
-import org.usfirst.frc3739.AuxBot.commands.UniArcadeDrive;
+import org.usfirst.frc3739.AuxBot.commands.SplitArcadeDrive;
 import org.usfirst.frc3739.AuxBot.commands.ZeroPointTurn;
 import org.usfirst.frc3739.AuxBot.utilities.SmartJoystick;
 
@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
+@SuppressWarnings("unused")
 public class OI {
 	private SmartJoystick joystickA = new SmartJoystick(0);
 	private SmartJoystick joystickB = new SmartJoystick(1);
@@ -19,14 +20,16 @@ public class OI {
 	public OI() {
 		// SmartDashboard Buttons
 		SmartDashboard.putData("Autonomous", new Autonomous());
+		SmartDashboard.putNumber("Throttle", 0);
+		SmartDashboard.putNumber("Rotate", 0);
 
 		// Creating buttons
-		JoystickButton triggerA = new JoystickButton(joystickA, 1);
-		JoystickButton triggerB = new JoystickButton(joystickB, 1);
+		JoystickButton aDpadDn = new JoystickButton(joystickA, 2);
+		JoystickButton bDpadDn = new JoystickButton(joystickB, 2);
 
 		// Mapping buttons
-		//triggerA.whileHeld(new UniArcadeDrive());
-		triggerB.whileHeld(new ZeroPointTurn());
+		aDpadDn.whileHeld(new ZeroPointTurn());
+		bDpadDn.whileHeld(new ZeroPointTurn());
 	}
 
 	public SmartJoystick getJoystick(char joystickLetter) {

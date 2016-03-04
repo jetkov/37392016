@@ -8,5 +8,9 @@ public class Hardware {
 
 	public static boolean isArchBot = false;
 	public static final int leftMotorsPort = 0, rightMotorsPort = 1;
+	
+	public static final double subSensitivity = 0.5;
+	public static final double rotateValueCurveModifier = 4;
+	public static final double turnTrim = 0;
 
 }

@@ -1,7 +1,6 @@
 package org.usfirst.frc3739.AuxBot.commands;
 
 import org.usfirst.frc3739.AuxBot.Robot;
-import org.usfirst.frc3739.AuxBot.utilities.SmartJoystick;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -24,8 +23,8 @@ public class ZeroPointTurn extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		SmartJoystick joystickB = Robot.oi.getJoystick('b');
-		Robot.driveTrain.drive(0, joystickB.getSmartX());
+		double rotate = Robot.oi.getJoystick('b').getSmartX();
+		Robot.driveTrain.drive(0, rotate);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

@@ -1,9 +1,11 @@
 package org.usfirst.frc3739.AuxBot.commands;
 
+import org.usfirst.frc3739.AuxBot.Hardware;
 import org.usfirst.frc3739.AuxBot.Robot;
 import org.usfirst.frc3739.AuxBot.utilities.SmartJoystick;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Robot drives arcade style with two joysticks, controlling movement and
@@ -26,9 +28,22 @@ public class SplitArcadeDrive extends Command {
 	protected void execute() {
 		SmartJoystick joystickA = Robot.oi.getJoystick('a');
 		SmartJoystick joystickB = Robot.oi.getJoystick('b');
-		if (joystickA.getSmartY() > 0.05 || joystickA.getSmartY() < 0.05) {
-			Robot.driveTrain.drive(joystickA.getSmartY(), -joystickB.getSmartX(), true);
+		
+		double subSensitivity = 1;		
+		double joyBX = joystickB.getSmartX();
+		
+		double throttle = joystickA.getSmartY();
+		double rotate = joyBX*(Math.log(Math.abs(throttle))/Hardware.rotateValueCurveModifier + 1) + Hardware.turnTrim;
+		
+		if (joystickA.getRawButton(2) == true || joystickB.getRawButton(2) == true) {
+			subSensitivity = Hardware.subSensitivity;
 		}
+		
+		else subSensitivity = 1;
+		
+		Robot.driveTrain.drive(throttle * subSensitivity, -rotate * subSensitivity, true);
+		SmartDashboard.putNumber("Throttle", throttle);
+		SmartDashboard.putNumber("Rotate", rotate);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
