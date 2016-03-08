@@ -27,16 +27,16 @@ public class DriveTrain extends Subsystem {
 	public DriveTrain() {
 		// Speed controller declarations on PWM ports 1 and 2
 		if (Config.isArchBot == true) {
-			lMotors = new Victor(Config.leftMotorsPort);
-			rMotors = new Victor(Config.rightMotorsPort);
+			lMotors = new Victor(Config.leftDriveMotorsPort);
+			rMotors = new Victor(Config.rightDriveMotorsPort);
 		} else {
-			lMotors = new Talon(Config.leftMotorsPort);
-			rMotors = new Talon(Config.rightMotorsPort);
+			lMotors = new Talon(Config.leftDriveMotorsPort);
+			rMotors = new Talon(Config.rightDriveMotorsPort);
 		}
 
 		// Setting the motors to inverted (due to the gearboxes)
-		// lMotors.setInverted(true);
-		// rMotors.setInverted(true);
+		lMotors.setInverted(Config.leftDriveMotorsInverted);
+		rMotors.setInverted(Config.rightDriveMotorsInverted);
 
 		// Initializing new RobotDrive object and gyro
 		drive = new RobotDrive(lMotors, rMotors);

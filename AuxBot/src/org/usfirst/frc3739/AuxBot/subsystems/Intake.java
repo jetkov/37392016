@@ -20,6 +20,7 @@ public class Intake extends Subsystem {
 	public Intake() {
 		// Declarations
 		rollerMotor = new Victor(Config.loaderRollerMotorPort);
+		rollerMotor.setInverted(Config.loaderRollerMotorInverted);
 
 		// Displaying these in the LiveWindow
 		LiveWindow.addActuator("Loader", "Roller", rollerMotor);

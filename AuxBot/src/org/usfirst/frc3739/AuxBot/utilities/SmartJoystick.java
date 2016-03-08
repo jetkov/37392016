@@ -8,11 +8,11 @@ public class SmartJoystick extends Joystick {
 	}
 
 	public double getSmartX() {
-		return super.getX() * (2-super.getZ())/2 + 0.1;
+		return super.getX() * ((2-super.getZ())/2 + 0.1);
 	}
 
 	public double getSmartY() {
-		return super.getY() * (2-super.getZ())/2 + 0.1;
+		return super.getY() * ((2-super.getZ())/2 + 0.1);
 	}
 
 }

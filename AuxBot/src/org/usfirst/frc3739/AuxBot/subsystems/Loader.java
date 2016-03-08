@@ -21,6 +21,7 @@ public class Loader extends Subsystem {
 	public Loader() {
 		// Declarations
 		jointMotor = new Talon(Config.loaderJointMotorPort);
+		jointMotor.setInverted(Config.loaderJointMotorInverted);
 
 		// Displaying these in the LiveWindow
 		LiveWindow.addActuator("Loader", "Joint", jointMotor);

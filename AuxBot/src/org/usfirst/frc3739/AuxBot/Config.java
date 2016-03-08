@@ -10,9 +10,16 @@ public class Config {
 	public static boolean isArchBot = false;
 
 	// Port configurations
-	public static final int leftMotorsPort = 0, rightMotorsPort = 1;
+	public static final int leftDriveMotorsPort = 0, rightDriveMotorsPort = 1;
 	public static final int loaderJointMotorPort = 8, loaderRollerMotorPort = 9;
-
+	
+	// Motor Polarity
+	public static final boolean leftDriveMotorsInverted = false;
+	public static final boolean rightDriveMotorsInverted = false;
+	
+	public static final boolean loaderJointMotorInverted = true;
+	public static final boolean loaderRollerMotorInverted = false;
+	
 	// Split Arcade drive control
 	public static final double precisionSensitivity = 0.5;
 	public static final double rotateValueThreshold = 0.05;
