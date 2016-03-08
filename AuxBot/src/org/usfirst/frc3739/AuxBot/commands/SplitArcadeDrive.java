@@ -1,6 +1,6 @@
 package org.usfirst.frc3739.AuxBot.commands;
 
-import org.usfirst.frc3739.AuxBot.Hardware;
+import org.usfirst.frc3739.AuxBot.Config;
 import org.usfirst.frc3739.AuxBot.Robot;
 import org.usfirst.frc3739.AuxBot.utilities.SmartJoystick;
 
@@ -28,19 +28,22 @@ public class SplitArcadeDrive extends Command {
 	protected void execute() {
 		SmartJoystick joystickA = Robot.oi.getJoystick('a');
 		SmartJoystick joystickB = Robot.oi.getJoystick('b');
-		
-		double subSensitivity = 1;		
+
+		double subSensitivity = 1;
 		double joyBX = joystickB.getSmartX();
-		
+
 		double throttle = joystickA.getSmartY();
-		double rotate = joyBX*(Math.log(Math.abs(throttle))/Hardware.rotateValueCurveModifier + 1) + Hardware.turnTrim;
-		
+		double rotate = joyBX
+				* (Math.log(Math.abs(throttle) - Config.rotateValueThreshold) / Config.rotateValueCurveModifier + 1)
+				+ Config.turnTrim;
+
 		if (joystickA.getRawButton(2) == true || joystickB.getRawButton(2) == true) {
-			subSensitivity = Hardware.subSensitivity;
+			subSensitivity = Config.precisionSensitivity;
 		}
-		
-		else subSensitivity = 1;
-		
+
+		else
+			subSensitivity = 1;
+
 		Robot.driveTrain.drive(throttle * subSensitivity, -rotate * subSensitivity, true);
 		SmartDashboard.putNumber("Throttle", throttle);
 		SmartDashboard.putNumber("Rotate", rotate);

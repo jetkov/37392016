@@ -1,6 +1,6 @@
 package org.usfirst.frc3739.AuxBot.subsystems;
 
-import org.usfirst.frc3739.AuxBot.Hardware;
+import org.usfirst.frc3739.AuxBot.Config;
 
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -19,24 +19,26 @@ public class Intake extends Subsystem {
 
 	public Intake() {
 		// Declarations
-		rollerMotor = new Victor(Hardware.loaderRollerMotorPoint);
+		rollerMotor = new Victor(Config.loaderRollerMotorPort);
 
 		// Displaying these in the LiveWindow
 		LiveWindow.addActuator("Loader", "Roller", rollerMotor);
 	}
 
-	public void initDefaultCommand() {}
+	public void initDefaultCommand() {
+	}
 
-	public void log() {};
-	
+	public void log() {
+	};
+
 	public void rollIn() {
 		rollerMotor.set(1);
 	}
-	
+
 	public void rollOut() {
 		rollerMotor.set(-1);
 	}
-	
+
 	public void killRoller() {
 		rollerMotor.set(0);
 	}

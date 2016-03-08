@@ -1,7 +1,8 @@
 package org.usfirst.frc3739.AuxBot;
 
 import org.usfirst.frc3739.AuxBot.commands.Autonomous;
-import org.usfirst.frc3739.AuxBot.commands.SplitArcadeDrive;
+import org.usfirst.frc3739.AuxBot.commands.RollInBall;
+import org.usfirst.frc3739.AuxBot.commands.RollOutBall;
 import org.usfirst.frc3739.AuxBot.commands.ZeroPointTurn;
 import org.usfirst.frc3739.AuxBot.utilities.SmartJoystick;
 
@@ -12,10 +13,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * This class is the glue that binds the controls on the physical operator
  * interface to the commands and command groups that allow control of the robot.
  */
-@SuppressWarnings("unused")
 public class OI {
-	private SmartJoystick joystickA = new SmartJoystick(0);
+	private SmartJoystick joystickA = new SmartJoystick(2);
 	private SmartJoystick joystickB = new SmartJoystick(1);
+	private SmartJoystick joystickC = new SmartJoystick(0);
 
 	public OI() {
 		// SmartDashboard Buttons
@@ -26,10 +27,14 @@ public class OI {
 		// Creating buttons
 		JoystickButton aDpadDn = new JoystickButton(joystickA, 2);
 		JoystickButton bDpadDn = new JoystickButton(joystickB, 2);
+		JoystickButton cDpadUp = new JoystickButton(joystickC, 3);
+		JoystickButton cDpadDn = new JoystickButton(joystickC, 2);
 
 		// Mapping buttons
 		aDpadDn.whileHeld(new ZeroPointTurn());
 		bDpadDn.whileHeld(new ZeroPointTurn());
+		cDpadUp.whileHeld(new RollOutBall());
+		cDpadDn.whileHeld(new RollInBall());
 	}
 
 	public SmartJoystick getJoystick(char joystickLetter) {
@@ -38,8 +43,10 @@ public class OI {
 			return joystickA;
 		case 'b':
 			return joystickB;
+		case 'c':
+			return joystickC;
 		}
-		return joystickA;
+		return joystickC;
 	}
 
 }

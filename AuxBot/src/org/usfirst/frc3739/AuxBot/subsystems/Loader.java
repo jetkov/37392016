@@ -1,6 +1,6 @@
 package org.usfirst.frc3739.AuxBot.subsystems;
 
-import org.usfirst.frc3739.AuxBot.Hardware;
+import org.usfirst.frc3739.AuxBot.Config;
 import org.usfirst.frc3739.AuxBot.commands.OperateLoader;
 
 import edu.wpi.first.wpilibj.Talon;
@@ -20,7 +20,7 @@ public class Loader extends Subsystem {
 
 	public Loader() {
 		// Declarations
-		jointMotor = new Talon(Hardware.loaderJointMotorPort);
+		jointMotor = new Talon(Config.loaderJointMotorPort);
 
 		// Displaying these in the LiveWindow
 		LiveWindow.addActuator("Loader", "Joint", jointMotor);
