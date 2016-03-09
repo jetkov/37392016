@@ -24,7 +24,7 @@ public class ZeroPointTurn extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		double rotate = Robot.oi.getJoystick('b').getSmartX();
-		Robot.driveTrain.drive(0, rotate);
+		Robot.driveTrain.drive(0, -rotate);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

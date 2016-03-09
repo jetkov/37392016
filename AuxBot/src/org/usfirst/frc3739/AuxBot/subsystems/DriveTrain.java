@@ -4,11 +4,14 @@ import org.usfirst.frc3739.AuxBot.Config;
 import org.usfirst.frc3739.AuxBot.commands.SplitArcadeDrive;
 import org.usfirst.frc3739.AuxBot.utilities.SmartJoystick;
 
+import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
+import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 /**
  * The DriveTrain subsystem currently includes the two pairs of drive motors.
@@ -18,11 +21,11 @@ import edu.wpi.first.wpilibj.command.Subsystem;
  */
 public class DriveTrain extends Subsystem {
 
-	private RobotDrive drive;
 	private SpeedController lMotors, rMotors;
-	// ADXRS450_Gyro gyro;
+	private RobotDrive drive;
+	private ADXRS450_Gyro gyro;
 
-	// private static final double kP = 0.03;
+	private static final double kP = 0.03;
 
 	public DriveTrain() {
 		// Speed controller declarations on PWM ports 1 and 2
@@ -40,10 +43,10 @@ public class DriveTrain extends Subsystem {
 
 		// Initializing new RobotDrive object and gyro
 		drive = new RobotDrive(lMotors, rMotors);
-		// gyro = new ADXRS450_Gyro();
+		gyro = new ADXRS450_Gyro();
 
 		// Displaying in the LiveWindow
-		// LiveWindow.addSensor("Drive Train", "Gyro", gyro);
+		LiveWindow.addSensor("Drive Train", "Gyro", gyro);
 	}
 
 	// Hands the drivetrain over to joystick control when the subsystem is idle
@@ -92,11 +95,15 @@ public class DriveTrain extends Subsystem {
 		drive.arcadeDrive(moveValue, rotateValue);
 	}
 
-	// public void autoDrive() {
-	// gyro.reset();
-	// double angle = gyro.getAngle();
-	// drive.drive(-1.0, -angle * kP);
-	// Timer.delay(0.004);
-	// }
+	public void autoDrive() {
+		gyro.reset();
+		double angle = gyro.getAngle();
+		drive.drive(-1.0, -angle * kP);
+		Timer.delay(0.004);
+	}
+	
+	public ADXRS450_Gyro getGyro() {
+		return gyro;
+	}
 
 }

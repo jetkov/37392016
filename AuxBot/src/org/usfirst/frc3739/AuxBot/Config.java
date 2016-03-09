@@ -8,8 +8,13 @@ public class Config {
 
 	// Is this the main or auxiliary robot?
 	public static boolean isArchBot = false;
+	
+	// Computer port configurations
+	public static final int joystickA = 0;
+	public static final int joystickB = 1;
+	public static final int joystickC = 2;
 
-	// Port configurations
+	// Robot port configurations
 	public static final int leftDriveMotorsPort = 0, rightDriveMotorsPort = 1;
 	public static final int loaderJointMotorPort = 8, loaderRollerMotorPort = 9;
 	
@@ -24,6 +29,6 @@ public class Config {
 	public static final double precisionSensitivity = 0.5;
 	public static final double rotateValueThreshold = 0.05;
 	public static final double rotateValueCurveModifier = 4;
-	public static final double turnTrim = 0;
+	public static final double turnTrim = -0.15;
 
 }

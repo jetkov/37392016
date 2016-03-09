@@ -30,12 +30,12 @@ public class SplitArcadeDrive extends Command {
 		SmartJoystick joystickB = Robot.oi.getJoystick('b');
 
 		double subSensitivity = 1;
+		
 		double joyBX = joystickB.getSmartX();
 
 		double throttle = joystickA.getSmartY();
 		double rotate = joyBX
-				* (Math.log(Math.abs(throttle) - Config.rotateValueThreshold) / Config.rotateValueCurveModifier + 1)
-				+ Config.turnTrim;
+				* (Math.log(Math.abs(throttle) - Config.rotateValueThreshold) / Config.rotateValueCurveModifier + 1);
 
 		if (joystickA.getRawButton(2) == true || joystickB.getRawButton(2) == true) {
 			subSensitivity = Config.precisionSensitivity;
@@ -44,7 +44,7 @@ public class SplitArcadeDrive extends Command {
 		else
 			subSensitivity = 1;
 
-		Robot.driveTrain.drive(throttle * subSensitivity, -rotate * subSensitivity, true);
+		Robot.driveTrain.drive(throttle * subSensitivity, (-rotate * subSensitivity) + Config.turnTrim, true);
 		SmartDashboard.putNumber("Throttle", throttle);
 		SmartDashboard.putNumber("Rotate", rotate);
 	}
