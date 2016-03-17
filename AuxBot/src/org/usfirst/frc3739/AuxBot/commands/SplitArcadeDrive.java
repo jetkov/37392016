@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * rotation separately.
  *
  * @author Alex
- * @version 1.0.1b
  */
 public class SplitArcadeDrive extends Command {
 
@@ -30,7 +29,7 @@ public class SplitArcadeDrive extends Command {
 		SmartJoystick joystickB = Robot.oi.getJoystick('b');
 
 		double subSensitivity = 1;
-		
+
 		double joyBX = joystickB.getSmartX();
 
 		double throttle = joystickA.getSmartY();

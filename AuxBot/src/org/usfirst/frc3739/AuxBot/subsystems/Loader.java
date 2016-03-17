@@ -8,12 +8,11 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 /**
- * The Arm subsystem will include the shoulder and elbow joint actuators of the
- * arm, their encoders, and sensors related to the relative movement of the arm.
- * Currently it only includes a test joint actuator and its encoder.
+ * The Loader subsystem currently is the front-end loader on the bot, while it
+ * includes specifically the single joint actuator mating its arm section to the
+ * channel mount.
  *
  * @author Alex
- * @version 1.0.0a
  */
 public class Loader extends Subsystem {
 	private Talon jointMotor;
@@ -31,12 +30,13 @@ public class Loader extends Subsystem {
 		setDefaultCommand(new OperateLoader());
 	}
 
-	public void log() {};
-	
+	public void log() {
+	};
+
 	public void setJointSpeed(double speed) {
 		jointMotor.set(speed);
 	}
-	
+
 	public void killJoint() {
 		jointMotor.set(0);
 	}

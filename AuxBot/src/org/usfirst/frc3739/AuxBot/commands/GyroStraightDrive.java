@@ -6,10 +6,9 @@ import org.usfirst.frc3739.AuxBot.utilities.SmartJoystick;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Robot drives arcade style with a single joystick.
+ * Robot drives straight forward, joystick controlling the throttle,
  *
  * @author Alex
- * @version 1.0.0b
  */
 public class GyroStraightDrive extends Command {
 

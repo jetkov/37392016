@@ -6,6 +6,11 @@ import org.usfirst.frc3739.AuxBot.utilities.SmartJoystick;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+/**
+ * Allows for the control of the loader joint with a joystick.
+ * 
+ * @author Alex
+ */
 public class OperateLoader extends Command {
 	private SmartJoystick joystickC = Robot.oi.getJoystick('c');
 

@@ -8,7 +8,6 @@ import edu.wpi.first.wpilibj.command.Command;
  * Robot drives arcade style with a single joystick.
  *
  * @author Alex
- * @version 1.0.0b
  */
 public class UniArcadeDrive extends Command {
 

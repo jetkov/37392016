@@ -15,10 +15,10 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * The DriveTrain subsystem currently includes the two pairs of drive motors.
+ * The DriveTrain subsystem currently includes the two pairs of drive motors,
+ * and the gyro.
  *
  * @author Alex
- * @version 1.0.3b
  */
 public class DriveTrain extends Subsystem {
 
@@ -27,7 +27,7 @@ public class DriveTrain extends Subsystem {
 	private ADXRS450_Gyro gyro;
 
 	public DriveTrain() {
-		// Speed controller declarations on PWM ports 1 and 2
+		// Speed controller declarations
 		if (Config.isArchBot == true) {
 			lMotors = new Victor(Config.leftDriveMotorsPort);
 			rMotors = new Victor(Config.rightDriveMotorsPort);
@@ -85,15 +85,34 @@ public class DriveTrain extends Subsystem {
 	 *            The value to use for forwards/backwards
 	 * @param rotateValue
 	 *            The value to use for the rotate right/left
+	 * @param squaredInputs
+	 *            If this is true, the sensitivity is decreased at lower speeds
 	 */
 	public void drive(double throttleValue, double rotateValue, boolean squaredInputs) {
 		drive.arcadeDrive(throttleValue, rotateValue, squaredInputs);
 	}
 
+	/**
+	 * Value controlled arcade style driving.
+	 *
+	 * @param throttleValue
+	 *            The value to use for forwards/backwards
+	 * @param rotateValue
+	 *            The value to use for the rotate right/left
+	 */
 	public void drive(double throttleValue, double rotateValue) {
 		drive.arcadeDrive(throttleValue, rotateValue);
 	}
 
+	/**
+	 * Throttle is controlled via input, but rotation rotation output is
+	 * controlled by the gyro. This means that the bot will correct itself and
+	 * continue to drive straight even if it gets hit or while driving over
+	 * rough terrain.
+	 * 
+	 * @param throttleValue
+	 *            The value to use for forwards/backwards
+	 */
 	public void gyroStraightDrive(double throttleValue) {
 		gyro.reset();
 		double angle = gyro.getAngle();
@@ -102,7 +121,8 @@ public class DriveTrain extends Subsystem {
 		Timer.delay(0.004);
 		SmartDashboard.putNumber("Gyro Straight Drive Rotate Value", rotateValue);
 	}
-	
+
+	// Returns the gyro
 	public ADXRS450_Gyro getGyro() {
 		return gyro;
 	}

@@ -7,12 +7,10 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 /**
- * The Arm subsystem will include the shoulder and elbow joint actuators of the
- * arm, their encoders, and sensors related to the relative movement of the arm.
- * Currently it only includes a test joint actuator and its encoder.
+ * The intake subsystem currently includes the roller inside the bucket (part of
+ * the front-end loader).
  *
  * @author Alex
- * @version 1.0.0a
  */
 public class Intake extends Subsystem {
 	private Victor rollerMotor;
@@ -22,7 +20,7 @@ public class Intake extends Subsystem {
 		rollerMotor = new Victor(Config.loaderRollerMotorPort);
 		rollerMotor.setInverted(Config.loaderRollerMotorInverted);
 
-		// Displaying these in the LiveWindow
+		// Displaying this in the LiveWindow
 		LiveWindow.addActuator("Loader", "Roller", rollerMotor);
 	}
 

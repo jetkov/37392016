@@ -5,11 +5,10 @@ import org.usfirst.frc3739.AuxBot.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Robot drives arcade style with two joysticks, controlling movement and
- * rotation separately.
+ * Robot does a zero point turn under the control of the joystick normally used
+ * for turning.
  *
  * @author Alex
- * @version 1.0.1b
  */
 public class ZeroPointTurn extends Command {
 
