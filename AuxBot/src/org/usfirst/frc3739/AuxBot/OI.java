@@ -1,6 +1,7 @@
 package org.usfirst.frc3739.AuxBot;
 
 import org.usfirst.frc3739.AuxBot.commands.Autonomous;
+import org.usfirst.frc3739.AuxBot.commands.GyroStraightDrive;
 import org.usfirst.frc3739.AuxBot.commands.RollInBall;
 import org.usfirst.frc3739.AuxBot.commands.RollOutBall;
 import org.usfirst.frc3739.AuxBot.commands.ZeroPointTurn;
@@ -25,7 +26,9 @@ public class OI {
 		SmartDashboard.putNumber("Rotate", 0);
 
 		// Creating buttons
+		JoystickButton aDpadUp = new JoystickButton(joystickA, 3);
 		JoystickButton aDpadDn = new JoystickButton(joystickA, 2);
+		JoystickButton bDpadUp = new JoystickButton(joystickB, 3);
 		JoystickButton bDpadDn = new JoystickButton(joystickB, 2);
 		JoystickButton cDpadUp = new JoystickButton(joystickC, 3);
 		JoystickButton cDpadDn = new JoystickButton(joystickC, 2);
@@ -33,6 +36,8 @@ public class OI {
 		// Mapping buttons
 		aDpadDn.whileHeld(new ZeroPointTurn());
 		bDpadDn.whileHeld(new ZeroPointTurn());
+		aDpadUp.whileHeld(new GyroStraightDrive());
+		bDpadUp.whileHeld(new GyroStraightDrive());
 		cDpadUp.whileHeld(new RollOutBall());
 		cDpadDn.whileHeld(new RollInBall());
 	}

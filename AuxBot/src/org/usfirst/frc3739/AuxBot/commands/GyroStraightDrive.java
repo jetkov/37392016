@@ -1,22 +1,19 @@
 package org.usfirst.frc3739.AuxBot.commands;
 
-import org.usfirst.frc3739.AuxBot.Config;
 import org.usfirst.frc3739.AuxBot.Robot;
 import org.usfirst.frc3739.AuxBot.utilities.SmartJoystick;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * Robot drives arcade style with two joysticks, controlling movement and
- * rotation separately.
+ * Robot drives arcade style with a single joystick.
  *
  * @author Alex
- * @version 1.0.1b
+ * @version 1.0.0b
  */
-public class SplitArcadeDrive extends Command {
+public class GyroStraightDrive extends Command {
 
-	public SplitArcadeDrive() {
+	public GyroStraightDrive() {
 		requires(Robot.driveTrain);
 	}
 
@@ -27,26 +24,8 @@ public class SplitArcadeDrive extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		SmartJoystick joystickA = Robot.oi.getJoystick('a');
-		SmartJoystick joystickB = Robot.oi.getJoystick('b');
-
-		double subSensitivity = 1;
-		
-		double joyBX = joystickB.getSmartX();
-
 		double throttle = joystickA.getSmartY();
-		double rotate = joyBX
-				* (Math.log(Math.abs(throttle) - Config.rotateValueThreshold) / Config.rotateValueCurveModifier + 1);
-
-		if (joystickA.getRawButton(2) == true || joystickB.getRawButton(2) == true) {
-			subSensitivity = Config.precisionSensitivity;
-		}
-
-		else
-			subSensitivity = 1;
-
-		Robot.driveTrain.drive(throttle * subSensitivity, (-rotate * subSensitivity) + Config.turnTrim);
-		SmartDashboard.putNumber("Throttle", throttle);
-		SmartDashboard.putNumber("Rotate", rotate);
+		Robot.driveTrain.gyroStraightDrive(throttle);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

@@ -12,6 +12,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The DriveTrain subsystem currently includes the two pairs of drive motors.
@@ -24,8 +25,6 @@ public class DriveTrain extends Subsystem {
 	private SpeedController lMotors, rMotors;
 	private RobotDrive drive;
 	private ADXRS450_Gyro gyro;
-
-	private static final double kP = 0.03;
 
 	public DriveTrain() {
 		// Speed controller declarations on PWM ports 1 and 2
@@ -69,37 +68,39 @@ public class DriveTrain extends Subsystem {
 	/**
 	 * Dual-stick controlled (a.k.a. East Coast?) arcade style driving.
 	 *
-	 * @param moveStick
+	 * @param throttleStick
 	 *            The Joystick object that represents the forward/backward
 	 *            direction
 	 * @param rotateStick
 	 *            The Joystick object that represents the rotation value
 	 */
-	public void drive(SmartJoystick moveStick, SmartJoystick rotateStick) {
-		drive.arcadeDrive(moveStick, 1, rotateStick, 0, true);
+	public void drive(SmartJoystick throttleStick, SmartJoystick rotateStick) {
+		drive.arcadeDrive(throttleStick, 1, rotateStick, 0, true);
 	}
 
 	/**
 	 * Value controlled arcade style driving.
 	 *
-	 * @param moveValue
+	 * @param throttleValue
 	 *            The value to use for forwards/backwards
 	 * @param rotateValue
 	 *            The value to use for the rotate right/left
 	 */
-	public void drive(double moveValue, double rotateValue, boolean squaredInputs) {
-		drive.arcadeDrive(moveValue, rotateValue, squaredInputs);
+	public void drive(double throttleValue, double rotateValue, boolean squaredInputs) {
+		drive.arcadeDrive(throttleValue, rotateValue, squaredInputs);
 	}
 
-	public void drive(double moveValue, double rotateValue) {
-		drive.arcadeDrive(moveValue, rotateValue);
+	public void drive(double throttleValue, double rotateValue) {
+		drive.arcadeDrive(throttleValue, rotateValue);
 	}
 
-	public void autoDrive() {
+	public void gyroStraightDrive(double throttleValue) {
 		gyro.reset();
 		double angle = gyro.getAngle();
-		drive.drive(-1.0, -angle * kP);
+		double rotateValue = -angle * Config.gyroDriveTrim;
+		drive.arcadeDrive(throttleValue, rotateValue);
 		Timer.delay(0.004);
+		SmartDashboard.putNumber("Gyro Straight Drive Rotate Value", rotateValue);
 	}
 	
 	public ADXRS450_Gyro getGyro() {
