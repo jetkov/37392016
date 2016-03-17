@@ -5,6 +5,7 @@ import org.usfirst.frc3739.AuxBot.commands.SplitArcadeDrive;
 import org.usfirst.frc3739.AuxBot.utilities.SmartJoystick;
 
 import edu.wpi.first.wpilibj.ADXRS450_Gyro;
+import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
@@ -25,6 +26,7 @@ public class DriveTrain extends Subsystem {
 	private SpeedController lMotors, rMotors;
 	private RobotDrive drive;
 	private ADXRS450_Gyro gyro;
+	private BuiltInAccelerometer accel;
 
 	public DriveTrain() {
 		// Speed controller declarations
@@ -43,9 +45,11 @@ public class DriveTrain extends Subsystem {
 		// Initializing new RobotDrive object and gyro
 		drive = new RobotDrive(lMotors, rMotors);
 		gyro = new ADXRS450_Gyro();
+		accel = new BuiltInAccelerometer();
 
 		// Displaying in the LiveWindow
 		LiveWindow.addSensor("Drive Train", "Gyro", gyro);
+		LiveWindow.addSensor("Drive Train", "Accelerometer", accel);
 	}
 
 	// Hands the drivetrain over to joystick control when the subsystem is idle
@@ -125,6 +129,11 @@ public class DriveTrain extends Subsystem {
 	// Returns the gyro
 	public ADXRS450_Gyro getGyro() {
 		return gyro;
+	}
+
+	// Returns the accelerometer
+	public BuiltInAccelerometer getAccel() {
+		return accel;
 	}
 
 }

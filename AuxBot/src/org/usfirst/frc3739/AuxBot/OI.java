@@ -4,6 +4,8 @@ import org.usfirst.frc3739.AuxBot.commands.Autonomous;
 import org.usfirst.frc3739.AuxBot.commands.GyroStraightDrive;
 import org.usfirst.frc3739.AuxBot.commands.RollInBall;
 import org.usfirst.frc3739.AuxBot.commands.RollOutBall;
+import org.usfirst.frc3739.AuxBot.commands.ScissorDown;
+import org.usfirst.frc3739.AuxBot.commands.ScissorUp;
 import org.usfirst.frc3739.AuxBot.commands.ZeroPointTurn;
 import org.usfirst.frc3739.AuxBot.utilities.SmartJoystick;
 
@@ -26,20 +28,24 @@ public class OI {
 		SmartDashboard.putNumber("Rotate", 0);
 
 		// Creating buttons
-		JoystickButton aDpadUp = new JoystickButton(joystickA, 3);
-		JoystickButton aDpadDn = new JoystickButton(joystickA, 2);
-		JoystickButton bDpadUp = new JoystickButton(joystickB, 3);
-		JoystickButton bDpadDn = new JoystickButton(joystickB, 2);
-		JoystickButton cDpadUp = new JoystickButton(joystickC, 3);
-		JoystickButton cDpadDn = new JoystickButton(joystickC, 2);
+		JoystickButton aDPadUp = new JoystickButton(joystickA, 3);
+		JoystickButton aDPadDn = new JoystickButton(joystickA, 2);
+		JoystickButton bDPadUp = new JoystickButton(joystickB, 3);
+		JoystickButton bDPadDn = new JoystickButton(joystickB, 2);
+		JoystickButton cDPadUp = new JoystickButton(joystickC, 3);
+		JoystickButton cDPadDn = new JoystickButton(joystickC, 2);
+		JoystickButton cBPadRghtUp = new JoystickButton(joystickC, 11);
+		JoystickButton cBPadRghtDn = new JoystickButton(joystickC, 10);
 
 		// Mapping buttons
-		aDpadDn.whileHeld(new ZeroPointTurn());
-		bDpadDn.whileHeld(new ZeroPointTurn());
-		aDpadUp.whileHeld(new GyroStraightDrive());
-		bDpadUp.whileHeld(new GyroStraightDrive());
-		cDpadUp.whileHeld(new RollOutBall());
-		cDpadDn.whileHeld(new RollInBall());
+		aDPadDn.whileHeld(new ZeroPointTurn());
+		bDPadDn.whileHeld(new ZeroPointTurn());
+		aDPadUp.whileHeld(new GyroStraightDrive());
+		bDPadUp.whileHeld(new GyroStraightDrive());
+		cDPadUp.whileHeld(new RollOutBall());
+		cDPadDn.whileHeld(new RollInBall());
+		cBPadRghtUp.whileHeld(new ScissorUp());
+		cBPadRghtDn.whileHeld(new ScissorDown());
 	}
 
 	public SmartJoystick getJoystick(char joystickLetter) {

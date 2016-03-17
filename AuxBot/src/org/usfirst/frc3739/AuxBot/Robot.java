@@ -4,6 +4,7 @@ import org.usfirst.frc3739.AuxBot.commands.Autonomous;
 import org.usfirst.frc3739.AuxBot.subsystems.DriveTrain;
 import org.usfirst.frc3739.AuxBot.subsystems.Intake;
 import org.usfirst.frc3739.AuxBot.subsystems.Loader;
+import org.usfirst.frc3739.AuxBot.subsystems.Scissor;
 
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -25,6 +26,7 @@ public class Robot extends IterativeRobot {
 
 	public static OI oi;
 	public static DriveTrain driveTrain;
+	public static Scissor scissor;
 	public static Loader loader;
 	public static Intake intake;
 
@@ -36,6 +38,7 @@ public class Robot extends IterativeRobot {
 	 */
 	public void robotInit() {
 		driveTrain = new DriveTrain();
+		scissor = new Scissor();
 		loader = new Loader();
 		intake = new Intake();
 
@@ -95,6 +98,7 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 		SmartDashboard.putData("Gyro", driveTrain.getGyro());
+		SmartDashboard.putData("Accelerometer", driveTrain.getAccel());
 	}
 
 	/**
