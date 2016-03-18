@@ -17,22 +17,17 @@ public class Config {
 	public static final int joystickC = 0;
 
 	// Robot port configurations
-	public static final int leftDriveMotorsPort = 0, rightDriveMotorsPort = 1;
-	public static final int scissorMotorPort = 9;
-	public static final int loaderJointMotorPort = 7, loaderRollerMotorPort = 8;
+	public static final int leftDriveMotorsPort = 0, rightDriveMotorsPort = 1, scissorMotorPort = 9,
+			loaderJointMotorPort = 7, loaderRollerMotorPort = 8, winchMotorsPort = 6;
 
 	// Motor Polarity
-	public static final boolean leftDriveMotorsInverted = false;
-	public static final boolean rightDriveMotorsInverted = false;
-	public static final boolean scissorMotorInverted = true;
-	public static final boolean loaderJointMotorInverted = false;
-	public static final boolean loaderRollerMotorInverted = true;
+	public static final boolean leftDriveMotorsInverted = false, rightDriveMotorsInverted = false,
+			scissorMotorInverted = true, loaderJointMotorInverted = false, loaderRollerMotorInverted = true,
+			winchMotorsInverted = false;
 
 	// Split Arcade drive control
-	public static final double precisionSensitivity = 0.5;
-	public static final double rotateValueThreshold = 0.05;
-	public static final double rotateValueCurveModifier = 4;
-	public static final double turnTrim = -0.15;
+	public static final double precisionSensitivity = 0.5, rotateValueThreshold = 0.05, rotateValueCurveModifier = 4,
+			turnTrim = -0.15;
 
 	// Gyro Straight Drive Trim
 	public static final double gyroDriveTrim = 0.03;

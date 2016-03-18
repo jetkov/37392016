@@ -5,6 +5,7 @@ import org.usfirst.frc3739.AuxBot.subsystems.DriveTrain;
 import org.usfirst.frc3739.AuxBot.subsystems.Intake;
 import org.usfirst.frc3739.AuxBot.subsystems.Loader;
 import org.usfirst.frc3739.AuxBot.subsystems.Scissor;
+import org.usfirst.frc3739.AuxBot.subsystems.Winch;
 
 import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.IterativeRobot;
@@ -29,6 +30,7 @@ public class Robot extends IterativeRobot {
 	public static Scissor scissor;
 	public static Loader loader;
 	public static Intake intake;
+	public static Winch winch;
 
 	CameraServer cam;
 
@@ -41,6 +43,7 @@ public class Robot extends IterativeRobot {
 		scissor = new Scissor();
 		loader = new Loader();
 		intake = new Intake();
+		winch = new Winch();
 
 		// OI must be constructed after subsystems. If the OI creates Commands
 		// (which it very likely will), subsystems are not guaranteed to be
