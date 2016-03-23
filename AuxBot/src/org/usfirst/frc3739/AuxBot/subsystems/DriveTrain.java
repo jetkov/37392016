@@ -54,7 +54,7 @@ public class DriveTrain extends Subsystem {
 
 	// Hands the drivetrain over to joystick control when the subsystem is idle
 	public void initDefaultCommand() {
-		setDefaultCommand(new SplitArcadeDrive());
+		setDefaultCommand(new SplitArcadeDrive(false));
 	}
 
 	/**
@@ -113,7 +113,7 @@ public class DriveTrain extends Subsystem {
 	 * controlled by the gyro. This means that the bot will correct itself and
 	 * continue to drive straight even if it gets hit or while driving over
 	 * rough terrain.
-	 * 
+	 *
 	 * @param throttleValue
 	 *            The value to use for forwards/backwards
 	 */
@@ -121,7 +121,7 @@ public class DriveTrain extends Subsystem {
 		gyro.reset();
 		double angle = gyro.getAngle();
 		double rotateValue = -angle * Config.gyroDriveTrim;
-		drive.arcadeDrive(throttleValue, rotateValue);
+		drive.drive(throttleValue, rotateValue);
 		Timer.delay(0.004);
 		SmartDashboard.putNumber("Gyro Straight Drive Rotate Value", rotateValue);
 	}

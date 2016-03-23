@@ -15,8 +15,16 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class SplitArcadeDrive extends Command {
 
-	public SplitArcadeDrive() {
+	private double subSensitivity;
+
+	public SplitArcadeDrive(boolean subsensitized) {
 		requires(Robot.driveTrain);
+
+		if (subsensitized) {
+			subSensitivity = Config.precisionSensitivity;
+		} else {
+			subSensitivity = 1;
+		}
 	}
 
 	// Called just before this Command runs the first time
@@ -28,20 +36,11 @@ public class SplitArcadeDrive extends Command {
 		SmartJoystick joystickA = Robot.oi.getJoystick('a');
 		SmartJoystick joystickB = Robot.oi.getJoystick('b');
 
-		double subSensitivity = 1;
-
 		double joyBX = joystickB.getSmartX();
 
 		double throttle = joystickA.getSmartY();
 		double rotate = joyBX
 				* (Math.log(Math.abs(throttle) - Config.rotateValueThreshold) / Config.rotateValueCurveModifier + 1);
-
-		if (joystickA.getRawButton(2) == true || joystickB.getRawButton(2) == true) {
-			subSensitivity = Config.precisionSensitivity;
-		}
-
-		else
-			subSensitivity = 1;
 
 		Robot.driveTrain.drive(throttle * subSensitivity, (-rotate * subSensitivity) + Config.turnTrim);
 		SmartDashboard.putNumber("Throttle", throttle);
