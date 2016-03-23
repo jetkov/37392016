@@ -39,10 +39,20 @@ public class SplitArcadeDrive extends Command {
 		double joyBX = joystickB.getSmartX();
 
 		double throttle = joystickA.getSmartY();
-		double rotate = joyBX
-				* (Math.log(Math.abs(throttle) - Config.rotateValueThreshold) / Config.rotateValueCurveModifier + 1);
 
-		Robot.driveTrain.drive(throttle * subSensitivity, (-rotate * subSensitivity) + Config.turnTrim);
+		// By using a logarithmic function to create a curve, the smooth
+		// modification of the rotate joystick's sensitivity, depending in the
+		// throttle value, is possible.
+		// Choosing the greater value of either zero or the modifier causes
+		// below-threshold values to be eliminated.
+		double rotate = joyBX * Math.max(0,
+				(Math.log(Math.abs(throttle) - Config.rotateValueThreshold) / Config.rotateValueCurveModifier + 1));
+
+		throttle *= subSensitivity;
+		rotate += -rotate * subSensitivity + Config.turnTrim;
+
+		Robot.driveTrain.drive(throttle, rotate);
+
 		SmartDashboard.putNumber("Throttle", throttle);
 		SmartDashboard.putNumber("Rotate", rotate);
 	}
