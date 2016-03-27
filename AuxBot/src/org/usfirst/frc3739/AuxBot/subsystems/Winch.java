@@ -28,6 +28,10 @@ public class Winch extends Subsystem {
 
 	public void log() {
 	};
+	
+	public void setWinch(double speed) {
+		winchMotors.set(speed);
+	}
 
 	public void winchUp() {
 		winchMotors.set(1);
