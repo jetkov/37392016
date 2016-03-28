@@ -6,6 +6,8 @@ import org.usfirst.frc3739.AuxBot.commands.RollInBall;
 import org.usfirst.frc3739.AuxBot.commands.RollOutBall;
 import org.usfirst.frc3739.AuxBot.commands.ScissorDown;
 import org.usfirst.frc3739.AuxBot.commands.ScissorUp;
+import org.usfirst.frc3739.AuxBot.commands.WinchIn;
+import org.usfirst.frc3739.AuxBot.commands.WinchOut;
 import org.usfirst.frc3739.AuxBot.commands.ZeroPointTurn;
 import org.usfirst.frc3739.AuxBot.utilities.SmartJoystick;
 
@@ -36,6 +38,8 @@ public class OI {
 		JoystickButton cDPadDn = new JoystickButton(joystickC, 2);
 		JoystickButton cBPadRghtUp = new JoystickButton(joystickC, 11);
 		JoystickButton cBPadRghtDn = new JoystickButton(joystickC, 10);
+		JoystickButton cBPadLeftUp = new JoystickButton(joystickC, 6);
+		JoystickButton cBPadLeftDn = new JoystickButton(joystickC, 7);
 
 		// Mapping buttons
 		aDPadDn.whileHeld(new ZeroPointTurn());
@@ -48,6 +52,9 @@ public class OI {
 
 		cBPadRghtUp.whileHeld(new ScissorUp());
 		cBPadRghtDn.whileHeld(new ScissorDown());
+
+		cBPadLeftUp.whileHeld(new WinchOut());
+		cBPadLeftDn.whileHeld(new WinchIn());
 	}
 
 	public SmartJoystick getJoystick(char joystickLetter) {

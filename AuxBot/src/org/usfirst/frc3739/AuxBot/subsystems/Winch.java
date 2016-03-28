@@ -2,6 +2,7 @@ package org.usfirst.frc3739.AuxBot.subsystems;
 
 import org.usfirst.frc3739.AuxBot.Config;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -28,20 +29,26 @@ public class Winch extends Subsystem {
 
 	public void log() {
 	};
-	
+
 	public void setWinch(double speed) {
 		winchMotors.set(speed);
 	}
 
-	public void winchUp() {
-		winchMotors.set(1);
+	public void winchIn() {
+		for (double i = 0.1; i <= 1; i += 0.05) {
+			Timer.delay(0.01);
+			winchMotors.set(i);
+		}
 	}
 
-	public void winchDown() {
-		winchMotors.set(-1);
+	public void winchOut() {
+		for (double i = -0.1; i >= -1; i -= 0.05) {
+			Timer.delay(0.01);
+			winchMotors.set(i);
+		}
 	}
 
-	public void killwinch() {
+	public void killWinch() {
 		winchMotors.set(0);
 	}
 

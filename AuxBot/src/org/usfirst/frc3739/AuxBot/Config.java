@@ -49,7 +49,7 @@ public class Config {
 
 	// Robot port configurations
 	public static final int leftDriveMotorsPort = 0, rightDriveMotorsPort = 1, scissorMotorPort = 9,
-			loaderJointMotorPort = 7, loaderRollerMotorPort = 8, winchMotorsPort = 6;
+			loaderJointMotorPort = 7, loaderRollerMotorPort = 8, winchMotorsPort = 5;
 
 	// Motor Polarity
 	public static final boolean leftDriveMotorsInverted = false, rightDriveMotorsInverted = false,
