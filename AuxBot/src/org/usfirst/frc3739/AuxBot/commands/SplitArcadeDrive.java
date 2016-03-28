@@ -15,16 +15,10 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class SplitArcadeDrive extends Command {
 
-	private double subSensitivity;
+	private double subSensitivity = 1;
 
 	public SplitArcadeDrive(boolean subsensitized) {
 		requires(Robot.driveTrain);
-
-		if (subsensitized) {
-			subSensitivity = Config.precisionSensitivity;
-		} else {
-			subSensitivity = 1;
-		}
 	}
 
 	// Called just before this Command runs the first time
@@ -35,6 +29,12 @@ public class SplitArcadeDrive extends Command {
 	protected void execute() {
 		SmartJoystick joystickA = Robot.oi.getJoystick('a');
 		SmartJoystick joystickB = Robot.oi.getJoystick('b');
+
+		if (joystickA.getRawButton(1) || joystickB.getRawButton(1)) {
+			subSensitivity = Config.precisionSensitivity;
+		} else {
+			subSensitivity = 1;
+		}
 
 		double joyBX = joystickB.getSmartX();
 

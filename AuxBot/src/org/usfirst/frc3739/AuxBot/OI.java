@@ -6,7 +6,6 @@ import org.usfirst.frc3739.AuxBot.commands.RollInBall;
 import org.usfirst.frc3739.AuxBot.commands.RollOutBall;
 import org.usfirst.frc3739.AuxBot.commands.ScissorDown;
 import org.usfirst.frc3739.AuxBot.commands.ScissorUp;
-import org.usfirst.frc3739.AuxBot.commands.SplitArcadeDrive;
 import org.usfirst.frc3739.AuxBot.commands.ZeroPointTurn;
 import org.usfirst.frc3739.AuxBot.utilities.SmartJoystick;
 
@@ -29,10 +28,8 @@ public class OI {
 		SmartDashboard.putNumber("Rotate", 0);
 
 		// Creating buttons
-		JoystickButton aTriggr = new JoystickButton(joystickA, 1);
 		JoystickButton aDPadUp = new JoystickButton(joystickA, 3);
 		JoystickButton aDPadDn = new JoystickButton(joystickA, 2);
-		JoystickButton bTriggr = new JoystickButton(joystickB, 1);
 		JoystickButton bDPadUp = new JoystickButton(joystickB, 3);
 		JoystickButton bDPadDn = new JoystickButton(joystickB, 2);
 		JoystickButton cDPadUp = new JoystickButton(joystickC, 3);
@@ -41,8 +38,6 @@ public class OI {
 		JoystickButton cBPadRghtDn = new JoystickButton(joystickC, 10);
 
 		// Mapping buttons
-		aTriggr.whileHeld(new SplitArcadeDrive(true));
-		bTriggr.whileHeld(new SplitArcadeDrive(true));
 		aDPadDn.whileHeld(new ZeroPointTurn());
 		bDPadDn.whileHeld(new ZeroPointTurn());
 		aDPadUp.whileHeld(new GyroStraightDrive());
