@@ -1,6 +1,8 @@
 package org.usfirst.frc3739.AuxBot.commands;
 
+import org.usfirst.frc3739.AuxBot.Config;
 import org.usfirst.frc3739.AuxBot.Robot;
+import org.usfirst.frc3739.AuxBot.utilities.LogitechDualAction;
 import org.usfirst.frc3739.AuxBot.utilities.SmartJoystick;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -12,6 +14,9 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class GyroStraightDrive extends Command {
 
+	private LogitechDualAction driveController = Robot.oi.driveController;
+	private SmartJoystick joystickA = Robot.oi.joystickA;
+
 	public GyroStraightDrive() {
 		requires(Robot.driveTrain);
 	}
@@ -22,8 +27,14 @@ public class GyroStraightDrive extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		SmartJoystick joystickA = Robot.oi.getJoystick('a');
-		double throttle = joystickA.getSmartY();
+		double throttle;
+
+		if (Config.usingDriveController) {
+			throttle = driveController.getLY();
+		} else {
+			throttle = joystickA.getSmartY();
+		}
+
 		Robot.driveTrain.gyroStraightDrive(throttle);
 	}
 

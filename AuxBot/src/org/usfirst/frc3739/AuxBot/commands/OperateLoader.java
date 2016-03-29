@@ -1,18 +1,21 @@
 package org.usfirst.frc3739.AuxBot.commands;
 
+import org.usfirst.frc3739.AuxBot.Config;
 import org.usfirst.frc3739.AuxBot.Robot;
+import org.usfirst.frc3739.AuxBot.utilities.LogitechWingman;
 import org.usfirst.frc3739.AuxBot.utilities.SmartJoystick;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * Allows for the control of the loader joint with a joystick.
- * 
+ *
  * @author Alex
  */
 public class OperateLoader extends Command {
-	private SmartJoystick joystickC = Robot.oi.getJoystick('c');
+
+	private LogitechWingman operatorController = Robot.oi.operatorController;
+	private SmartJoystick joystickC = Robot.oi.joystickC;
 
 	public OperateLoader() {
 		requires(Robot.loader);
@@ -24,8 +27,11 @@ public class OperateLoader extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.loader.setJointSpeed(joystickC.getSmartY());
-		SmartDashboard.putNumber("JoystickC Y", joystickC.getSmartY());
+		if (Config.usingOperatorController) {
+			Robot.loader.setJointSpeed(operatorController.getRY());
+		} else {
+			Robot.loader.setJointSpeed(joystickC.getSmartY());
+		}
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

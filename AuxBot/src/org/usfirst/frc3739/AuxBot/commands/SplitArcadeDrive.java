@@ -2,6 +2,7 @@ package org.usfirst.frc3739.AuxBot.commands;
 
 import org.usfirst.frc3739.AuxBot.Config;
 import org.usfirst.frc3739.AuxBot.Robot;
+import org.usfirst.frc3739.AuxBot.utilities.LogitechDualAction;
 import org.usfirst.frc3739.AuxBot.utilities.SmartJoystick;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -17,6 +18,10 @@ public class SplitArcadeDrive extends Command {
 
 	private double subSensitivity = 1;
 
+	private LogitechDualAction driveController = Robot.oi.driveController;
+	private SmartJoystick joystickA = Robot.oi.joystickA;
+	private SmartJoystick joystickB = Robot.oi.joystickB;
+
 	public SplitArcadeDrive(boolean subsensitized) {
 		requires(Robot.driveTrain);
 	}
@@ -27,34 +32,45 @@ public class SplitArcadeDrive extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		SmartJoystick joystickA = Robot.oi.getJoystick('a');
-		SmartJoystick joystickB = Robot.oi.getJoystick('b');
+		double rawTurn, throttle;
 
-		if (joystickA.getRawButton(1) || joystickB.getRawButton(1)) {
-			subSensitivity = Config.precisionSensitivity;
+		if (Config.usingDriveController) {
+
+			if (driveController.getRawButton(0) || driveController.getRawButton(0)) {
+				subSensitivity = Config.precisionSensitivity;
+			} else {
+				subSensitivity = 1;
+			}
+
+			throttle = driveController.getLY();
+			rawTurn = driveController.getRX();
 		} else {
-			subSensitivity = 1;
+
+			if (joystickA.getRawButton(1) || joystickB.getRawButton(1)) {
+				subSensitivity = Config.precisionSensitivity;
+			} else {
+				subSensitivity = 1;
+			}
+
+			throttle = joystickA.getSmartY();
+			rawTurn = joystickB.getSmartX();
 		}
 
-		double joyBX = joystickB.getSmartX();
-
-		double throttle = joystickA.getSmartY();
-
 		// By using a logarithmic function to create a curve, the smooth
-		// modification of the rotate joystick's sensitivity, depending in the
+		// modification of the turn joystick's sensitivity, depending in the
 		// throttle value, is possible.
 		// Choosing the greater value of either zero or the modifier causes
 		// below-threshold values to be eliminated.
-		double rotate = joyBX * Math.max(0,
-				(Math.log(Math.abs(throttle) - Config.rotateValueThreshold) / Config.rotateValueCurveModifier + 1));
+		double turn = rawTurn * Math.max(0,
+				(Math.log(Math.abs(throttle) - Config.turnValueThreshold) / Config.turnValueCurveModifier + 1));
 
 		throttle *= subSensitivity;
-		rotate += -rotate * subSensitivity + Config.turnTrim;
+		turn += -turn * subSensitivity + Config.turnTrim;
 
-		Robot.driveTrain.drive(throttle, rotate);
+		Robot.driveTrain.drive(throttle, turn);
 
 		SmartDashboard.putNumber("Throttle", throttle);
-		SmartDashboard.putNumber("Rotate", rotate);
+		SmartDashboard.putNumber("Turn", turn);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
