@@ -30,6 +30,10 @@ public class Scissor extends Subsystem {
 	public void log() {
 	};
 
+	public void setSpeed(double speed) {
+		scissorMotor.set(speed);
+	}
+
 	public void scissorUp() {
 		scissorMotor.set(1);
 	}

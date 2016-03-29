@@ -2,6 +2,7 @@ package org.usfirst.frc3739.AuxBot;
 
 import org.usfirst.frc3739.AuxBot.commands.Autonomous;
 import org.usfirst.frc3739.AuxBot.commands.GyroStraightDrive;
+import org.usfirst.frc3739.AuxBot.commands.LiftSystemUp;
 import org.usfirst.frc3739.AuxBot.commands.RollInBall;
 import org.usfirst.frc3739.AuxBot.commands.RollOutBall;
 import org.usfirst.frc3739.AuxBot.commands.ScissorDown;
@@ -26,8 +27,9 @@ public class OI {
 	public OI() {
 		// SmartDashboard Buttons
 		SmartDashboard.putData("Autonomous", new Autonomous());
-		SmartDashboard.putNumber("Throttle", 0);
-		SmartDashboard.putNumber("Rotate", 0);
+		SmartDashboard.putData("Scissor Up", new ScissorUp());
+		SmartDashboard.putData("Scissor Down", new ScissorDown());
+		SmartDashboard.putData("Lift System Up", new LiftSystemUp());
 
 		// Creating buttons
 		JoystickButton aDPadUp = new JoystickButton(joystickA, 3);

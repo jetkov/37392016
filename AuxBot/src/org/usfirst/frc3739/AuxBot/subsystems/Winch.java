@@ -30,7 +30,7 @@ public class Winch extends Subsystem {
 	public void log() {
 	};
 
-	public void setWinch(double speed) {
+	public void setSpeed(double speed) {
 		winchMotors.set(speed);
 	}
 
