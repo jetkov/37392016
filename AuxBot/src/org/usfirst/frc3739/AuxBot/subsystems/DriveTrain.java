@@ -47,6 +47,8 @@ public class DriveTrain extends Subsystem {
 		gyro = new ADXRS450_Gyro();
 		accel = new BuiltInAccelerometer();
 
+		gyro.reset();
+
 		// Displaying in the LiveWindow
 		LiveWindow.addSensor("Drive Train", "Gyro", gyro);
 		LiveWindow.addSensor("Drive Train", "Accelerometer", accel);
@@ -108,6 +110,10 @@ public class DriveTrain extends Subsystem {
 		drive.arcadeDrive(throttleValue, rotateValue);
 	}
 
+	public void resetGyro() {
+		gyro.reset();
+	}
+
 	/**
 	 * Throttle is controlled via input, but rotation rotation output is
 	 * controlled by the gyro. This means that the bot will correct itself and
@@ -118,7 +124,6 @@ public class DriveTrain extends Subsystem {
 	 *            The value to use for forwards/backwards
 	 */
 	public void gyroStraightDrive(double throttleValue) {
-		gyro.reset();
 		double angle = gyro.getAngle();
 		double rotateValue = -angle * Config.gyroDriveTrim;
 		drive.drive(throttleValue, rotateValue);
