@@ -49,7 +49,7 @@ public class SplitArcadeDrive extends Command {
 				(Math.log(Math.abs(throttle) - Config.rotateValueThreshold) / Config.rotateValueCurveModifier + 1));
 
 		throttle *= subSensitivity;
-		rotate += -rotate * subSensitivity + Config.turnTrim;
+		rotate = -rotate * subSensitivity + Config.turnTrim;
 
 		Robot.driveTrain.drive(throttle, rotate);
 
