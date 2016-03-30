@@ -23,21 +23,45 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  */
 public class OI {
 
-	public LogitechWingman operatorController;
-	public LogitechDualAction driveController;
+	public final LogitechWingman operatorController = new LogitechWingman(Config.operatorControllerPort);
+	public final LogitechDualAction driveController = new LogitechDualAction(Config.driveControllerPort);
 
-	public SmartJoystick joystickA;
-	public SmartJoystick joystickB;
-	public SmartJoystick joystickC;
+	public final SmartJoystick joystickA = new SmartJoystick(Config.joystickAPort);
+	public final SmartJoystick joystickB = new SmartJoystick(Config.joystickBPort);
+	public final SmartJoystick joystickC = new SmartJoystick(Config.joystickCPort);
 
 	public OI() {
-		if (Config.usingOperatorController) {
-			// Declaring controller
-			operatorController = new LogitechWingman(Config.operatorControllerPort);
-		} else {
-			// Declaring joystick
-			joystickC = new SmartJoystick(Config.joystickCPort);
+		// SmartDashboard Buttons
+		SmartDashboard.putData("Autonomous", new Autonomous());
+		SmartDashboard.putData("Scissor Up", new ScissorUp());
+		SmartDashboard.putData("Scissor Down", new ScissorDown());
+		SmartDashboard.putData("Lift System Up", new LiftSystemUp());
 
+		if (Config.usingDriveController) {
+			// Creating buttons
+			JoystickButton leftBmpr = new JoystickButton(driveController, 5);
+			JoystickButton rghtBmpr = new JoystickButton(driveController, 6);
+
+			// Mapping buttons
+			leftBmpr.whileHeld(new ZeroPointTurn());
+			rghtBmpr.whileHeld(new ZeroPointTurn());
+		} else {
+			// Creating buttons
+			JoystickButton aDPadUp = new JoystickButton(joystickA, 3);
+			JoystickButton aDPadDn = new JoystickButton(joystickA, 2);
+			JoystickButton bDPadUp = new JoystickButton(joystickB, 3);
+			JoystickButton bDPadDn = new JoystickButton(joystickB, 2);
+
+			// Mapping buttons
+			aDPadDn.whileHeld(new ZeroPointTurn());
+			bDPadDn.whileHeld(new ZeroPointTurn());
+			aDPadUp.whileHeld(new GyroStraightDrive());
+			bDPadUp.whileHeld(new GyroStraightDrive());
+		}
+		if (Config.usingOperatorController) {
+			// Creating buttons
+			// Mapping buttons
+		} else {
 			// Creating buttons
 			JoystickButton cDPadUp = new JoystickButton(joystickC, 3);
 			JoystickButton cDPadDn = new JoystickButton(joystickC, 2);
@@ -56,41 +80,6 @@ public class OI {
 			cBPadLeftUp.whileHeld(new WinchOut());
 			cBPadLeftDn.whileHeld(new WinchIn());
 		}
-
-		if (Config.usingDriveController) {
-			// Declaring controller
-			driveController = new LogitechDualAction(Config.driveControllerPort);
-
-			// Creating buttons
-			JoystickButton leftBmpr = new JoystickButton(driveController, 5);
-			JoystickButton rghtBmpr = new JoystickButton(driveController, 6);
-
-			// Mapping buttons
-			// leftBmpr.whileHeld(new ZeroPointTurn());
-			// rghtBmpr.whileHeld(new ZeroPointTurn());
-		} else {
-			// Declaring joysticks
-			joystickA = new SmartJoystick(Config.joystickAPort);
-			joystickB = new SmartJoystick(Config.joystickBPort);
-
-			// Creating buttons
-			JoystickButton aDPadUp = new JoystickButton(joystickA, 3);
-			JoystickButton aDPadDn = new JoystickButton(joystickA, 2);
-			JoystickButton bDPadUp = new JoystickButton(joystickB, 3);
-			JoystickButton bDPadDn = new JoystickButton(joystickB, 2);
-
-			// Mapping buttons
-			aDPadDn.whileHeld(new ZeroPointTurn());
-			bDPadDn.whileHeld(new ZeroPointTurn());
-			aDPadUp.whileHeld(new GyroStraightDrive());
-			bDPadUp.whileHeld(new GyroStraightDrive());
-		}
-
-		// SmartDashboard Buttons
-		SmartDashboard.putData("Autonomous", new Autonomous());
-		SmartDashboard.putData("Scissor Up", new ScissorUp());
-		SmartDashboard.putData("Scissor Down", new ScissorDown());
-		SmartDashboard.putData("Lift System Up", new LiftSystemUp());
 
 	}
 
