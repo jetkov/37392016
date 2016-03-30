@@ -39,12 +39,7 @@ public class OI {
 
 		if (Config.usingDriveController) {
 			// Creating buttons
-			JoystickButton leftBmpr = new JoystickButton(driveController, 5);
-			JoystickButton rghtBmpr = new JoystickButton(driveController, 6);
-
 			// Mapping buttons
-			leftBmpr.whileHeld(new ZeroPointTurn());
-			rghtBmpr.whileHeld(new ZeroPointTurn());
 		} else {
 			// Creating buttons
 			JoystickButton aDPadUp = new JoystickButton(joystickA, 3);
