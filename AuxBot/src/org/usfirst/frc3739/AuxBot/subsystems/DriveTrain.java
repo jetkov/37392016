@@ -52,7 +52,8 @@ public class DriveTrain extends Subsystem {
 		LiveWindow.addSensor("Drive Train", "Accelerometer", accel);
 	}
 
-	// Hands the drivetrain over to joystick control when the subsystem is idle
+	// Hands the drivetrain over to dual joystick control when the subsystem is
+	// idle
 	public void initDefaultCommand() {
 		setDefaultCommand(new SplitArcadeDrive(false));
 	}
