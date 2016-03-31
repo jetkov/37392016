@@ -4,19 +4,17 @@ import org.usfirst.frc3739.ArchBot.Config;
 import org.usfirst.frc3739.ArchBot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * Robot drives arcade style with two joysticks, controlling movement and
- * rotation separately.
+ * Robot does a zero point turn under the control of the joystick normally used
+ * for turning.
  *
  * @author Alex
  */
-public class SplitArcadeDrive extends Command {
-
+public class ZeroPointTurn extends Command {
 	private double subSensitivity = 1;
 
-	public SplitArcadeDrive(boolean subsensitized) {
+	public ZeroPointTurn() {
 		requires(Robot.driveTrain);
 	}
 
@@ -31,26 +29,8 @@ public class SplitArcadeDrive extends Command {
 		} else {
 			subSensitivity = 1;
 		}
-
-		double joyBX = Robot.oi.joystickB.getSmartX();
-
-		double throttle = Robot.oi.joystickA.getSmartY();
-
-		// By using a logarithmic function to create a curve, the smooth
-		// modification of the rotate joystick's sensitivity, depending in the
-		// throttle value, is possible.
-		// Choosing the greater value of either zero or the modifier causes
-		// below-threshold values to be eliminated.
-		double rotate = joyBX * Math.max(0,
-				(Math.log(Math.abs(throttle) - Config.turnValueThreshold) / Config.turnValueCurveModifier + 1));
-
-		throttle *= subSensitivity;
-		rotate = rotate * subSensitivity + Config.turnTrim;
-
-		Robot.driveTrain.drive(throttle, rotate);
-
-		SmartDashboard.putNumber("Throttle", throttle);
-		SmartDashboard.putNumber("Rotate", rotate);
+		double rotate = Robot.oi.joystickB.getSmartX() * subSensitivity;
+		Robot.driveTrain.drive(0, rotate);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

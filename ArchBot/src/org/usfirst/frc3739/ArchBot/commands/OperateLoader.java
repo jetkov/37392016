@@ -1,18 +1,21 @@
 package org.usfirst.frc3739.ArchBot.commands;
 
 import org.usfirst.frc3739.ArchBot.Robot;
+import org.usfirst.frc3739.ArchBot.utilities.SmartJoystick;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
- * Robot drives arcade style with a single joystick.
- *
+ * Allows for the control of the loader joint with a joystick.
+ * 
  * @author Alex
  */
-public class UniArcadeDrive extends Command {
+public class OperateLoader extends Command {
+	private SmartJoystick joystickC = Robot.oi.getJoystick('c');
 
-	public UniArcadeDrive() {
-		requires(Robot.driveTrain);
+	public OperateLoader() {
+		requires(Robot.loader);
 	}
 
 	// Called just before this Command runs the first time
@@ -21,7 +24,8 @@ public class UniArcadeDrive extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.driveTrain.drive(Robot.oi.getJoystick('a'));
+		Robot.loader.setJointSpeed(joystickC.getSmartY());
+		SmartDashboard.putNumber("JoystickC Y", joystickC.getSmartY());
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -31,7 +35,7 @@ public class UniArcadeDrive extends Command {
 
 	// Called once after isFinished returns true
 	protected void end() {
-		Robot.driveTrain.drive(0, 0);
+		Robot.loader.killJoint();
 	}
 
 	// Called when another command which requires one or more of the same

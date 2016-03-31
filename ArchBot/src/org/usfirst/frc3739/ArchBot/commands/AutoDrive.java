@@ -2,16 +2,21 @@ package org.usfirst.frc3739.ArchBot.commands;
 
 import org.usfirst.frc3739.ArchBot.Robot;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Robot drives arcade style with a single joystick.
+ * Robot drives straight forward, joystick controlling the throttle,
  *
  * @author Alex
  */
-public class UniArcadeDrive extends Command {
+public class AutoDrive extends Command {
+	private double throttle, turn, time;
 
-	public UniArcadeDrive() {
+	public AutoDrive(double thrttle, double trn, double tme) {
+		this.throttle = thrttle;
+		this.turn = trn;
+		this.time = tme;
 		requires(Robot.driveTrain);
 	}
 
@@ -21,7 +26,8 @@ public class UniArcadeDrive extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.driveTrain.drive(Robot.oi.getJoystick('a'));
+		Robot.driveTrain.drive(throttle, turn);
+		Timer.delay(time);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

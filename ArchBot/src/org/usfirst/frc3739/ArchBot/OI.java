@@ -1,12 +1,19 @@
 package org.usfirst.frc3739.ArchBot;
 
-import org.usfirst.frc3739.ArchBot.commands.Autonomous;
-import org.usfirst.frc3739.ArchBot.commands.FireBall;
-import org.usfirst.frc3739.ArchBot.commands.GrabBall;
-import org.usfirst.frc3739.ArchBot.commands.RotateElbow90;
-import org.usfirst.frc3739.ArchBot.commands.UniArcadeDrive;
+import org.usfirst.frc3739.ArchBot.commands.AThomas;
+import org.usfirst.frc3739.ArchBot.commands.GyroStraightDrive;
+import org.usfirst.frc3739.ArchBot.commands.LiftSystemUp;
+import org.usfirst.frc3739.ArchBot.commands.LockWinch;
+import org.usfirst.frc3739.ArchBot.commands.RollInBall;
+import org.usfirst.frc3739.ArchBot.commands.RollOutBall;
+import org.usfirst.frc3739.ArchBot.commands.ScissorDown;
+import org.usfirst.frc3739.ArchBot.commands.ScissorUp;
+import org.usfirst.frc3739.ArchBot.commands.UnlockWinch;
+import org.usfirst.frc3739.ArchBot.commands.WinchIn;
+import org.usfirst.frc3739.ArchBot.commands.WinchOut;
+import org.usfirst.frc3739.ArchBot.commands.ZeroPointTurn;
+import org.usfirst.frc3739.ArchBot.utilities.SmartJoystick;
 
-import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -15,39 +22,61 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	
-	private Joystick joystickA = new Joystick(2);
-	private Joystick joystickB = new Joystick(3);
-	private Joystick joystickC = new Joystick(0);
-	private Joystick joystickD = new Joystick(1);
+	public SmartJoystick joystickA = new SmartJoystick(Config.joystickA);
+	public SmartJoystick joystickB = new SmartJoystick(Config.joystickB);
+	private SmartJoystick joystickC = new SmartJoystick(Config.joystickC);
 
 	public OI() {
 		// SmartDashboard Buttons
-		SmartDashboard.putData("Grab Ball", new GrabBall());
-		SmartDashboard.putData("Fire Ball", new FireBall());
-		SmartDashboard.putData("Rotate Elbow 90 Degrees", new RotateElbow90());
-		SmartDashboard.putData("Autonomous", new Autonomous());
-		SmartDashboard.putNumber("Shoulder Encoder", 0.0);
-		
+		SmartDashboard.putData("Autonomous", new AThomas());
+		SmartDashboard.putData("Scissor Up", new ScissorUp());
+		SmartDashboard.putData("Scissor Down", new ScissorDown());
+		SmartDashboard.putData("Lift System Up", new LiftSystemUp());
+
 		// Creating buttons
-		JoystickButton triggerA = new JoystickButton(joystickA, 1);
-		JoystickButton dUpD = new JoystickButton(joystickD, 3);
-		JoystickButton dDownD = new JoystickButton(joystickD, 2);
-		
+		JoystickButton aDPadUp = new JoystickButton(joystickA, 3);
+		JoystickButton aDPadDn = new JoystickButton(joystickA, 2);
+		JoystickButton bDPadUp = new JoystickButton(joystickB, 3);
+		JoystickButton bDPadDn = new JoystickButton(joystickB, 2);
+		JoystickButton cDPadUp = new JoystickButton(joystickC, 3);
+		JoystickButton cDPadDn = new JoystickButton(joystickC, 2);
+		JoystickButton cBPadRghtUp = new JoystickButton(joystickC, 11);
+		JoystickButton cBPadRghtDn = new JoystickButton(joystickC, 10);
+		JoystickButton cBPadLeftUp = new JoystickButton(joystickC, 6);
+		JoystickButton cBPadLeftDn = new JoystickButton(joystickC, 7);
+		JoystickButton cBpadBkLeft = new JoystickButton(joystickC, 8);
+		JoystickButton cBpadBkRght = new JoystickButton(joystickC, 9);
+
 		// Mapping buttons
-		triggerA.whileHeld(new UniArcadeDrive());
-		dDownD.whileHeld(new GrabBall());
-		dUpD.whileHeld(new FireBall());
+		aDPadDn.whileHeld(new ZeroPointTurn());
+		bDPadDn.whileHeld(new ZeroPointTurn());
+		aDPadUp.whileHeld(new GyroStraightDrive());
+		bDPadUp.whileHeld(new GyroStraightDrive());
+
+		cDPadUp.whileHeld(new RollOutBall());
+		cDPadDn.whileHeld(new RollInBall());
+
+		cBPadRghtUp.whileHeld(new ScissorUp());
+		cBPadRghtDn.whileHeld(new ScissorDown());
+
+		cBPadLeftUp.whileHeld(new WinchOut());
+		cBPadLeftDn.whileHeld(new WinchIn());
+
+		cBpadBkLeft.whileHeld(new UnlockWinch());
+		cBpadBkRght.whileHeld(new LockWinch());
+
 	}
 
-	public Joystick getJoystick(char joystickLetter) {
+	public SmartJoystick getJoystick(char joystickLetter) {
 		switch (joystickLetter) {
-			case 'a': return joystickA;
-			case 'b': return joystickB;
-			case 'c': return joystickC;
-			case 'd': return joystickD;
+		case 'a':
+			return joystickA;
+		case 'b':
+			return joystickB;
+		case 'c':
+			return joystickC;
 		}
-		return joystickA;
+		return joystickC;
 	}
 
 }

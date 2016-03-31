@@ -4,15 +4,10 @@ import org.usfirst.frc3739.ArchBot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
-/**
- * Robot drives arcade style with a single joystick.
- *
- * @author Alex
- */
-public class UniArcadeDrive extends Command {
+public class RollInBall extends Command {
 
-	public UniArcadeDrive() {
-		requires(Robot.driveTrain);
+	public RollInBall() {
+		requires(Robot.intake);
 	}
 
 	// Called just before this Command runs the first time
@@ -21,7 +16,7 @@ public class UniArcadeDrive extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.driveTrain.drive(Robot.oi.getJoystick('a'));
+		Robot.intake.rollIn();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -31,7 +26,7 @@ public class UniArcadeDrive extends Command {
 
 	// Called once after isFinished returns true
 	protected void end() {
-		Robot.driveTrain.drive(0, 0);
+		Robot.intake.killRoller();
 	}
 
 	// Called when another command which requires one or more of the same

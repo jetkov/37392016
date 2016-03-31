@@ -1,9 +1,10 @@
 package org.usfirst.frc3739.ArchBot;
 
-import org.usfirst.frc3739.ArchBot.commands.Autonomous;
-import org.usfirst.frc3739.ArchBot.subsystems.CanadArm;
+import org.usfirst.frc3739.ArchBot.commands.AThomas;
 import org.usfirst.frc3739.ArchBot.subsystems.DriveTrain;
-import org.usfirst.frc3739.ArchBot.subsystems.Hand;
+import org.usfirst.frc3739.ArchBot.subsystems.Intake;
+import org.usfirst.frc3739.ArchBot.subsystems.Loader;
+import org.usfirst.frc3739.ArchBot.subsystems.Scissor;
 import org.usfirst.frc3739.ArchBot.subsystems.Winch;
 
 import edu.wpi.first.wpilibj.CameraServer;
@@ -11,6 +12,7 @@ import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -25,10 +27,11 @@ public class Robot extends IterativeRobot {
 
 	public static OI oi;
 	public static DriveTrain driveTrain;
+	public static Scissor scissor;
+	public static Loader loader;
+	public static Intake intake;
 	public static Winch winch;
-	public static CanadArm arm;
-	public static Hand hand;
-	
+
 	CameraServer cam;
 
 	/**
@@ -37,9 +40,10 @@ public class Robot extends IterativeRobot {
 	 */
 	public void robotInit() {
 		driveTrain = new DriveTrain();
+		scissor = new Scissor();
+		loader = new Loader();
+		intake = new Intake();
 		winch = new Winch();
-		arm = new CanadArm();
-		hand = new Hand();
 
 		// OI must be constructed after subsystems. If the OI creates Commands
 		// (which it very likely will), subsystems are not guaranteed to be
@@ -48,12 +52,13 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 
 		// instantiate the command used for the autonomous period
-		autonomousCommand = new Autonomous();
-		
+		autonomousCommand = new AThomas();
+
 		cam = CameraServer.getInstance();
-        cam.setQuality(50);
-        //the camera name (ex "cam0") can be found through the roborio web interface
-        cam.startAutomaticCapture("cam0");
+		cam.setQuality(50);
+		// the camera name (ex "cam0") can be found through the roborio web
+		// interface
+		cam.startAutomaticCapture("cam0");
 	}
 
 	/**
@@ -95,6 +100,9 @@ public class Robot extends IterativeRobot {
 	 */
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
+		SmartDashboard.putData("Gyro", driveTrain.getGyro());
+		SmartDashboard.putData("Accelerometer", driveTrain.getAccel());
+		SmartDashboard.putNumber("Servo", Winch.lockServo.getAngle());
 	}
 
 	/**
