@@ -2,7 +2,6 @@ package org.usfirst.frc3739.AuxBot.subsystems;
 
 import org.usfirst.frc3739.AuxBot.Config;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -32,11 +31,7 @@ public class Intake extends Subsystem {
 	};
 
 	public void rollIn() {
-		for (double i = 0.4; i < 1; i += 0.05) { // For longevity of the plastic
-													// gear...
-			rollerMotor.set(i);
-			Timer.delay(0.5);
-		}
+		rollerMotor.set(1);
 	}
 
 	public void rollOut() {

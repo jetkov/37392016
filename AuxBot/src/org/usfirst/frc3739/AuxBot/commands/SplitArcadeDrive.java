@@ -2,7 +2,6 @@ package org.usfirst.frc3739.AuxBot.commands;
 
 import org.usfirst.frc3739.AuxBot.Config;
 import org.usfirst.frc3739.AuxBot.Robot;
-import org.usfirst.frc3739.AuxBot.utilities.SmartJoystick;
 
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -27,18 +26,15 @@ public class SplitArcadeDrive extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		SmartJoystick joystickA = Robot.oi.getJoystick('a');
-		SmartJoystick joystickB = Robot.oi.getJoystick('b');
-
-		if (joystickA.getRawButton(1) || joystickB.getRawButton(1)) {
+		if (Robot.oi.joystickA.getRawButton(1) || Robot.oi.joystickB.getRawButton(1)) {
 			subSensitivity = Config.precisionSensitivity;
 		} else {
 			subSensitivity = 1;
 		}
 
-		double joyBX = joystickB.getSmartX();
+		double joyBX = Robot.oi.joystickB.getSmartX();
 
-		double throttle = joystickA.getSmartY();
+		double throttle = Robot.oi.joystickA.getSmartY();
 
 		// By using a logarithmic function to create a curve, the smooth
 		// modification of the rotate joystick's sensitivity, depending in the
@@ -46,10 +42,10 @@ public class SplitArcadeDrive extends Command {
 		// Choosing the greater value of either zero or the modifier causes
 		// below-threshold values to be eliminated.
 		double rotate = joyBX * Math.max(0,
-				(Math.log(Math.abs(throttle) - Config.rotateValueThreshold) / Config.rotateValueCurveModifier + 1));
+				(Math.log(Math.abs(throttle) - Config.turnValueThreshold) / Config.turnValueCurveModifier + 1));
 
 		throttle *= subSensitivity;
-		rotate = -rotate * subSensitivity + Config.turnTrim;
+		rotate = rotate * subSensitivity + Config.turnTrim;
 
 		Robot.driveTrain.drive(throttle, rotate);
 

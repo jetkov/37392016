@@ -1,7 +1,6 @@
 package org.usfirst.frc3739.AuxBot.commands;
 
 import org.usfirst.frc3739.AuxBot.Robot;
-import org.usfirst.frc3739.AuxBot.utilities.SmartJoystick;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -18,12 +17,12 @@ public class GyroStraightDrive extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		Robot.driveTrain.resetGyro();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		SmartJoystick joystickA = Robot.oi.getJoystick('a');
-		double throttle = joystickA.getSmartY();
+		double throttle = Robot.oi.joystickA.getSmartY();
 		Robot.driveTrain.gyroStraightDrive(throttle);
 	}
 

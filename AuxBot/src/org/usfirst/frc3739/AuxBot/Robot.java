@@ -1,6 +1,6 @@
 package org.usfirst.frc3739.AuxBot;
 
-import org.usfirst.frc3739.AuxBot.commands.Autonomous;
+import org.usfirst.frc3739.AuxBot.commands.AThomas;
 import org.usfirst.frc3739.AuxBot.subsystems.DriveTrain;
 import org.usfirst.frc3739.AuxBot.subsystems.Intake;
 import org.usfirst.frc3739.AuxBot.subsystems.Loader;
@@ -52,7 +52,7 @@ public class Robot extends IterativeRobot {
 		oi = new OI();
 
 		// instantiate the command used for the autonomous period
-		autonomousCommand = new Autonomous();
+		autonomousCommand = new AThomas();
 
 		cam = CameraServer.getInstance();
 		cam.setQuality(50);
@@ -102,6 +102,7 @@ public class Robot extends IterativeRobot {
 		Scheduler.getInstance().run();
 		SmartDashboard.putData("Gyro", driveTrain.getGyro());
 		SmartDashboard.putData("Accelerometer", driveTrain.getAccel());
+		SmartDashboard.putNumber("Servo", Winch.lockServo.getAngle());
 	}
 
 	/**

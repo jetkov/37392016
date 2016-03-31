@@ -1,5 +1,6 @@
 package org.usfirst.frc3739.AuxBot.commands;
 
+import org.usfirst.frc3739.AuxBot.Config;
 import org.usfirst.frc3739.AuxBot.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
@@ -11,6 +12,7 @@ import edu.wpi.first.wpilibj.command.Command;
  * @author Alex
  */
 public class ZeroPointTurn extends Command {
+	private double subSensitivity = 1;
 
 	public ZeroPointTurn() {
 		requires(Robot.driveTrain);
@@ -22,8 +24,13 @@ public class ZeroPointTurn extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		double rotate = Robot.oi.getJoystick('b').getSmartX();
-		Robot.driveTrain.drive(0, -rotate);
+		if (Robot.oi.joystickA.getRawButton(1) || Robot.oi.joystickB.getRawButton(1)) {
+			subSensitivity = Config.precisionSensitivity;
+		} else {
+			subSensitivity = 1;
+		}
+		double rotate = Robot.oi.joystickB.getSmartX() * subSensitivity;
+		Robot.driveTrain.drive(0, rotate);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

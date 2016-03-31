@@ -2,21 +2,32 @@ package org.usfirst.frc3739.AuxBot.commands;
 
 import org.usfirst.frc3739.AuxBot.Robot;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
-public class RollOutBall extends Command {
+/**
+ * Robot drives straight forward, joystick controlling the throttle,
+ *
+ * @author Alex
+ */
+public class AutoDrive extends Command {
+	private double throttle, turn, time;
 
-	public RollOutBall() {
-		requires(Robot.intake);
+	public AutoDrive(double thrttle, double trn, double tme) {
+		this.throttle = thrttle;
+		this.turn = trn;
+		this.time = tme;
+		requires(Robot.driveTrain);
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		Robot.driveTrain.drive(throttle, turn);
+		Timer.delay(time);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.intake.rollOut();
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
@@ -26,7 +37,7 @@ public class RollOutBall extends Command {
 
 	// Called once after isFinished returns true
 	protected void end() {
-		Robot.intake.killRoller();
+		Robot.driveTrain.drive(0, 0);
 	}
 
 	// Called when another command which requires one or more of the same

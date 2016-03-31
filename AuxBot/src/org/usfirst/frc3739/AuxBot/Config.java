@@ -24,15 +24,15 @@ public class Config {
 
 	// Robot port configurations
 	public static final int leftDriveMotorsPort = 0, rightDriveMotorsPort = 1, scissorMotorPort = 9,
-			loaderJointMotorPort = 7, loaderRollerMotorPort = 8, winchMotorsPort = 5;
+			loaderJointMotorPort = 7, loaderRollerMotorPort = 8, winchMotorsPort = 5, lockServoPort = 4;
 
 	// Motor Polarity
-	public static final boolean leftDriveMotorsInverted = false, rightDriveMotorsInverted = false,
+	public static final boolean leftDriveMotorsInverted = true, rightDriveMotorsInverted = true,
 			scissorMotorInverted = true, loaderJointMotorInverted = false, loaderRollerMotorInverted = true,
 			winchMotorsInverted = false;
 
 	// Split Arcade drive control
-	public static final double precisionSensitivity = 0.5, rotateValueThreshold = 0.05, rotateValueCurveModifier = 4,
+	public static final double precisionSensitivity = 0.5, turnValueThreshold = 0.05, turnValueCurveModifier = 4,
 			turnTrim = -0.15;
 
 	// Gyro Straight Drive Trim
