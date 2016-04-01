@@ -100,7 +100,6 @@ public class Robot extends IterativeRobot {
 	 */
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
-		SmartDashboard.putData("Gyro", driveTrain.getGyro());
 		SmartDashboard.putData("Accelerometer", driveTrain.getAccel());
 		SmartDashboard.putNumber("Servo", Winch.lockServo.getAngle());
 	}

@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The winch subsystem currently includes the winch motor pair.
@@ -23,7 +24,7 @@ public class Winch extends Subsystem {
 		winchMotors.setInverted(Config.winchMotorsInverted);
 
 		lockServo = new Servo(Config.lockServoPort);
-		lockServo.set(0.5);
+		lockServo.setAngle(0);
 
 		// Displaying this in the LiveWindow
 		LiveWindow.addActuator("Winch", "Winch Motor", winchMotors);
@@ -60,12 +61,7 @@ public class Winch extends Subsystem {
 
 	public void setLockServo(double degrees) {
 		lockServo.setAngle(degrees);
-		while (lockServo.getAngle() < degrees) {
-			lockServo.set(1);
-		}
-		while (lockServo.getAngle() > degrees) {
-			lockServo.set(-1);
-		}
+		SmartDashboard.putNumber("Servo", lockServo.getAngle());
 	}
 
 	public void killServo() {

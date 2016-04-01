@@ -9,7 +9,7 @@ package org.usfirst.frc3739.AuxBot;
 public class Config {
 
 	// Is this the main or auxiliary robot?
-	public static boolean isArchBot = false;
+	public static boolean isArchBot = true;
 
 	// ARCHBOT CONFIGURATION
 
@@ -23,8 +23,8 @@ public class Config {
 	public static final int joystickC = 0;
 
 	// Robot port configurations
-	public static final int leftDriveMotorsPort = 0, rightDriveMotorsPort = 1, scissorMotorPort = 9,
-			loaderJointMotorPort = 7, loaderRollerMotorPort = 8, winchMotorsPort = 5, lockServoPort = 4;
+	public static final int leftDriveMotorsPort = 0, rightDriveMotorsPort = 1, scissorMotorPort = 2,
+			loaderJointMotorPort = 3, loaderRollerMotorPort = 4, winchMotorsPort = 5, lockServoPort = 6;
 
 	// Motor Polarity
 	public static final boolean leftDriveMotorsInverted = true, rightDriveMotorsInverted = true,
@@ -33,7 +33,7 @@ public class Config {
 
 	// Split Arcade drive control
 	public static final double precisionSensitivity = 0.5, turnValueThreshold = 0.05, turnValueCurveModifier = 4,
-			turnTrim = -0.15;
+			turnTrim = 0;
 
 	// Gyro Straight Drive Trim
 	public static final double gyroDriveTrim = 0.03;

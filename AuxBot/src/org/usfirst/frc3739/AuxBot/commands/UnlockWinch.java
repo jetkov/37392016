@@ -12,7 +12,7 @@ public class UnlockWinch extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		Robot.winch.setLockServo(20);
+		Robot.winch.setLockServo(0);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
@@ -26,7 +26,6 @@ public class UnlockWinch extends Command {
 
 	// Called once after isFinished returns true
 	protected void end() {
-		Robot.winch.killServo();
 	}
 
 	// Called when another command which requires one or more of the same

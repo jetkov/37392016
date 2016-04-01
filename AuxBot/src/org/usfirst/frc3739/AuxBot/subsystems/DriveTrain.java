@@ -4,16 +4,13 @@ import org.usfirst.frc3739.AuxBot.Config;
 import org.usfirst.frc3739.AuxBot.commands.SplitArcadeDrive;
 import org.usfirst.frc3739.AuxBot.utilities.SmartJoystick;
 
-import edu.wpi.first.wpilibj.ADXRS450_Gyro;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.Victor;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The DriveTrain subsystem currently includes the two pairs of drive motors,
@@ -25,7 +22,6 @@ public class DriveTrain extends Subsystem {
 
 	private SpeedController lMotors, rMotors;
 	private RobotDrive drive;
-	private ADXRS450_Gyro gyro;
 	private BuiltInAccelerometer accel;
 
 	public DriveTrain() {
@@ -44,11 +40,9 @@ public class DriveTrain extends Subsystem {
 
 		// Initializing new RobotDrive object and gyro
 		drive = new RobotDrive(lMotors, rMotors);
-		gyro = new ADXRS450_Gyro();
 		accel = new BuiltInAccelerometer();
 
 		// Displaying in the LiveWindow
-		LiveWindow.addSensor("Drive Train", "Gyro", gyro);
 		LiveWindow.addSensor("Drive Train", "Accelerometer", accel);
 	}
 
@@ -109,10 +103,6 @@ public class DriveTrain extends Subsystem {
 		drive.arcadeDrive(throttleValue, rotateValue);
 	}
 
-	public void resetGyro() {
-		gyro.reset();
-	}
-
 	/**
 	 * Throttle is controlled via input, but rotation rotation output is
 	 * controlled by the gyro. This means that the bot will correct itself and
@@ -122,18 +112,6 @@ public class DriveTrain extends Subsystem {
 	 * @param throttleValue
 	 *            The value to use for forwards/backwards
 	 */
-	public void gyroStraightDrive(double throttleValue) {
-		double angle = gyro.getAngle();
-		double rotateValue = -angle * Config.gyroDriveTrim;
-		drive.drive(throttleValue, rotateValue);
-		Timer.delay(0.004);
-		SmartDashboard.putNumber("Gyro Straight Drive Rotate Value", rotateValue);
-	}
-
-	// Returns the gyro
-	public ADXRS450_Gyro getGyro() {
-		return gyro;
-	}
 
 	// Returns the accelerometer
 	public BuiltInAccelerometer getAccel() {
