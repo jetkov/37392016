@@ -2,7 +2,6 @@ package org.usfirst.frc3739.AuxBot.commands;
 
 import org.usfirst.frc3739.AuxBot.Robot;
 
-import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
@@ -11,12 +10,11 @@ import edu.wpi.first.wpilibj.command.Command;
  * @author Alex
  */
 public class AutoDrive extends Command {
-	private double throttle, turn, time;
+	private double throttle, turn;
 
-	public AutoDrive(double thrttle, double trn, double tme) {
+	public AutoDrive(double thrttle, double trn) {
 		this.throttle = thrttle;
 		this.turn = trn;
-		this.time = tme;
 		requires(Robot.driveTrain);
 	}
 
@@ -27,7 +25,6 @@ public class AutoDrive extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		Robot.driveTrain.drive(throttle, turn);
-		Timer.delay(time);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
