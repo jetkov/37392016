@@ -8,6 +8,5 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AThomas extends CommandGroup {
 
 	public AThomas() {
-		addSequential(new AutoDrive(-0.75, 0), 2);
 	}
 }

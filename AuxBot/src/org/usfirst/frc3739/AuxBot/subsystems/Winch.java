@@ -42,14 +42,14 @@ public class Winch extends Subsystem {
 	}
 
 	public void winchIn() {
-		for (double i = 0.1; i <= 1; i += 0.05) {
+		for (double i = 0.1; i <= 0.5; i += 0.05) {
 			Timer.delay(0.01);
 			winchMotors.set(i);
 		}
 	}
 
 	public void winchOut() {
-		for (double i = -0.1; i >= -1; i -= 0.05) {
+		for (double i = -0.1; i >= -0.5; i -= 0.05) {
 			Timer.delay(0.01);
 			winchMotors.set(i);
 		}
